@@ -2,6 +2,7 @@
 	"name": "alt-labs/services",
 	"description": "Personal blog",
 	"version": "0.0.1",
+	"license": "MIT",
 	"authors": [{
 		"name": "Gilbert F. Ekoue",
 		"email": "gfolly@gmail.com"
@@ -20,8 +21,8 @@
         "exclude": ["vendor", ".DS_Store", "*.log"]
     },
 	"autoload": {
-		"psr-0": {
-			"App": "src/"
+		"psr-4": {
+			"AltLabs\\": "src/"
 		}
 	}
 }
