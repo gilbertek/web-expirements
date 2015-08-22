@@ -9,3 +9,13 @@ body {
 #map-canvas {
   height: 100%;
 }
+
+#pip-pano {
+  height: 300px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  /*background: red;*/
+}
