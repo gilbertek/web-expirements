@@ -1,9 +1,10 @@
 import React from 'React';
+import CharacterList from './CharacterList';
 
 const App = () =>
   <div className='container'>
     <div className='row'>
-      <h2>Hello, World!</h2>
+      <CharacterList />
     </div>
   </div>
 
