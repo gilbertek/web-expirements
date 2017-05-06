@@ -20,4 +20,5 @@ class HomePage extends Component {
 //     <a href='#about' className='btn btn-primary btn-lg'>Learn more</a>
 //   </div>
 
+HomePage.propTypes = {};
 export default HomePage;
