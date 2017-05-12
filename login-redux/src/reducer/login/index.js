@@ -29,8 +29,26 @@ export function login(email, password) {
     dispatch(setLoginSuccess(false));
     dispatch(setLoginError(null));
 
+    callLoginApi(email, password, error => {
+      dispatch(setLoginPending(false));
 
+      if (!error) {
+        dispatch(setLoginSuccess(true));
+      } else {
+        dispatch(setLoginError(error));
+      }
+    });
   };
+}
+
+function callLoginApi(email, password, callback) {
+  setTimeout(() => {
+    if (email === 'admin@example.com' && password === 'admin') {
+      return callback(null);
+    } else {
+      ret callback(new Error('Invalid email and password'));
+    }
+  }, 1000);
 }
 
 const initialState = {
@@ -45,6 +63,17 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isLoginPending: action.isLoginPending
       });
+
+    case SET_LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        isLoginSuccess: action.isLoginSuccess
+      });
+
+    case SET_LOGIN_ERROR:
+      return Object.assign({}, state, {
+        loginError: action.loginError
+      });
+
     default:
       return state;
   }
