@@ -46,7 +46,7 @@ function callLoginApi(email, password, callback) {
     if (email === 'admin@example.com' && password === 'admin') {
       return callback(null);
     } else {
-      ret callback(new Error('Invalid email and password'));
+      return callback(new Error('Invalid email and password'));
     }
   }, 1000);
 }
