@@ -1,6 +1,6 @@
 import React, { Component } from 'React';
 import { connect } from 'react-redux';
-import login from '../../reducer/login';
+import { login } from '../../reducer/login/actions';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    let { isLoginPending, isLoginSuccess, loginError } = this.props;
+    const { isLoginPending, isLoginSuccess, loginError } = this.props;
 
     return (
       <div className='login-form-wrapper'>
