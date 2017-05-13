@@ -6,15 +6,27 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      email: '',
+      password: ''
+    };
 
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    const target = e.target;
+    const name = target.name;
+
+    this.setState({
+      [name]: e.target.value
+    });
   }
 
   onSubmit(e) {
     e.preventDefault();
-
-    let { email, password } = this.state;
+    const { email, password } = this.state;
     this.props.login(email, password);
 
     this.setState({
@@ -24,7 +36,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    let { email, password } = this.state;
     let { isLoginPending, isLoginSuccess, loginError } = this.props;
 
     return (
@@ -37,8 +48,8 @@ class LoginForm extends Component {
               <input
                 type='email'
                 name='email'
-                onChange={e => this.setState({email: e.target.value})}
-                value={email}
+                onChange={this.onChange}
+                value={this.state.email}
               />
             </div>
 
@@ -47,8 +58,8 @@ class LoginForm extends Component {
               <input
                 type='password'
                 name='password'
-                onChange={e => this.setState({password: e.target.value})}
-                value={password}
+                onChange={this.onChange}
+                value={this.state.password}
               />
             </div>
 
