@@ -1,9 +1,10 @@
 import React from 'React';
+import LoginForm from './LoginForm/LoginForm';
 
 const App = () =>
   <div className='container'>
     <div className='row'>
-      <p>Hello, World!</p>
+      <LoginForm />
     </div>
   </div>
 
