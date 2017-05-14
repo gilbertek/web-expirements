@@ -26,17 +26,19 @@ class LoginForm extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+
     const { email, password } = this.state;
     this.props.login(email, password);
 
-    this.setState({
-      email: '',
-      password: ''
-    })
+    this.setState({ email: '', password: '' });
   }
 
   render() {
+    console.log(this.props);
+
     const { isLoginPending, isLoginSuccess, loginError } = this.props;
+
+    console.log(isLoginPending);
 
     return (
       <div className='login-form-wrapper'>
@@ -79,13 +81,13 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ login }) => {
   return {
-    isLoginPending: state.isLoginPending,
-    isLoginSuccess: state.isLoginSuccess,
-    loginError: state.loginError
+    isLoginPending: login.isLoginPending,
+    isLoginSuccess: login.isLoginSuccess,
+    loginError: login.loginError
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
