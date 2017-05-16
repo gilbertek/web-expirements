@@ -14,7 +14,28 @@ const store = createStore(reducer,
   composeEnhancers(applyMiddleware(thunk, logger),
 ));
 
-store.dispatch(() => {});
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+store.dispatch({
+  type: 'ADD_CARD',
+  data: {
+    front: 'front',
+    back: 'back'
+  }
+});
+
+
+store.dispatch({
+  type: 'ADD_CARD',
+  data: {
+    front: 'second front',
+    back: 'second back'
+  }
+});
+
+
 
 const root = document.getElementById('app-container');
 
