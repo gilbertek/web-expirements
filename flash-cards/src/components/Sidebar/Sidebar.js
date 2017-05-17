@@ -1,4 +1,9 @@
 import React, { Component } from 'React';
+import { connect } from 'react-redux';
+import {
+  showAddDeck,
+  hideAddDeck
+} from '../../reducer/sidebar';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -24,4 +29,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default connect()(Sidebar);
