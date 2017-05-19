@@ -14,10 +14,15 @@ class Sidebar extends Component {
     this.createDeck = this.createDeck.bind(this);
   }
 
+  componentDidUpdate() {
+    const elt = ReactDOM.findDOMNode(this.ref.add);
+    if (elt) elt.focus();
+  }
+
   createDeck(evt) {
     if (evt.which !== 13) return;
 
-    const name = ReactDom.findDomNode(this.ref.add).value;
+    const name = ReactDOM.findDomNode(this.ref.add).value;
     this.props.addDeck(name);
     this.props.hideDeck();
   }
