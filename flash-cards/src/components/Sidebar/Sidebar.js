@@ -22,7 +22,7 @@ class Sidebar extends Component {
   createDeck(evt) {
     if (evt.which !== 13) return;
 
-    const name = ReactDOM.findDomNode(this.ref.add).value;
+    const name = ReactDOM.findDomNode(this.add);
     this.props.addDeck(name);
     this.props.hideDeck();
   }
@@ -39,7 +39,8 @@ class Sidebar extends Component {
           <li key={i}>{deck.name}</li>
         )}
 
-        { props.addingDeck && <input ref='add' onKeyPress={this.createDeck} /> }
+        { props.addingDeck &&
+          <input ref={add => this.add = add} onKeyPress={this.createDeck} /> }
       </div>
     );
   }
