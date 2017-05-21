@@ -7,6 +7,9 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
 import logger from 'redux-logger';
+import { syncHistoryWithStore, routerReducer} from 'react-router-redux';
+
+reducer.routing = routerReducer;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -26,7 +29,6 @@ store.dispatch({
   }
 });
 
-
 store.dispatch({
   type: 'ADD_CARD',
   data: {
@@ -34,8 +36,6 @@ store.dispatch({
     back: 'second back'
   }
 });
-
-
 
 const root = document.getElementById('app-container');
 

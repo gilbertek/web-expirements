@@ -1,10 +1,10 @@
 {
-  "name": "flash-cards",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Gilbert Ekoue",
-  "license": "MIT",
-  "scripts": {
+	"name": "flash-cards",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "Gilbert Ekoue",
+	"license": "MIT",
+	"scripts": {
 		"start": "webpack-dev-server --color --open"
 	},
 	"dependencies": {
