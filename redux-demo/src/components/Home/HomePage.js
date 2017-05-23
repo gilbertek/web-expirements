@@ -7,7 +7,9 @@ class HomePage extends Component {
       <div className='jumbotron'>
         <h1>Admin Backend</h1>
         <p>React, Redux and React router for ultra-responsive apps.</p>
-        <Link to='about' className='btn btn-primary btn-lg'>Learn more</Link>
+        <Link to='about' className='btn btn-primary btn-lg'>
+          Learn more
+        </Link>
       </div>
     );
   }
