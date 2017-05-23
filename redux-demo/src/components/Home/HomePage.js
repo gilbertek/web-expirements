@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
 class HomePage extends Component {
   render() {
@@ -7,18 +7,10 @@ class HomePage extends Component {
       <div className='jumbotron'>
         <h1>Admin Backend</h1>
         <p>React, Redux and React router for ultra-responsive apps.</p>
-        <a href='/about' className='btn btn-primary btn-lg'>Learn more</a>
+        <Link to='about' className='btn btn-primary btn-lg'>Learn more</Link>
       </div>
     );
   }
 }
 
-// const HomePage = () =>
-//   <div className='jumbotron'>
-//     <h1>Admin Backend</h1>
-//     <p>React, Redux and React router for ultra-responsive apps.</p>
-//     <a href='#about' className='btn btn-primary btn-lg'>Learn more</a>
-//   </div>
-
-HomePage.propTypes = {};
 export default HomePage;
