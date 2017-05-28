@@ -2,7 +2,7 @@ import React from 'React';
 import ReactDOM from 'react-dom';
 import { Container } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
 import App from './components/App';
