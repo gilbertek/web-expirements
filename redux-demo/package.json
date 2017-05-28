@@ -5,7 +5,9 @@
 	"author": "Gilbert Ekoue",
 	"license": "MIT",
 	"scripts": {
-		"start": "webpack-dev-server --color --open"
+		"start": "webpack-dev-server --color --open",
+		"lint": "eslint .",
+		"lint:fix": "yarn run lint -- --fix"
 	},
 	"dependencies": {
 		"prop-types": "^15.5.10",
