@@ -18,9 +18,7 @@ const root = document.getElementById('app-container');
 const render = (Component) => {
   ReactDOM.render(
     <Provider store={store}>
-      <Router history={history} routes={routes}>
-        <Component />
-      </Router>
+      <Component />
     </Provider>,
     root
   )
