@@ -1,11 +1,11 @@
 import React from 'React';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Header = () =>
   <nav>
-    <Link to='/' className='active'>Home</Link>
+    <NavLink exact to='/' activeClassName='active'>Home</NavLink>
     { ' | ' }
-    <Link to='/about' className='active'>About</Link>
+    <NavLink to='/about' activeClassName='active'>About</NavLink>
   </nav>
 
 export default Header;
