@@ -5,7 +5,7 @@ const Header = () => (
     <nav>
       <NavLink exact to='/' activeClassName='active'>Home</NavLink>
       { ' | ' }
-      <NavLink to='/about' activeClassName='active'>About</NavLink>
+      <NavLink exact to='/about' activeClassName='active'>About</NavLink>
     </nav>
 );
 

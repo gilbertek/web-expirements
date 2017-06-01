@@ -1,9 +1,5 @@
 import React, { Component } from 'React';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import propTypes from 'prop-types';
 import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
@@ -14,18 +10,10 @@ class App extends Component {
     return(
       <div className='container-fluid'>
         <div className='row'>
-          <Router>
-            <Switch>
-              {/* <Header /> */}
-              <Route exact path='/' component={HomePage} />
+          <Header />
 
-              <Route path='/about' component={AboutPage} />
-
-              <Route render={function () {
-                return <p>Not Found...</p>
-              }} />
-            </Switch>
-          </Router>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/about' component={AboutPage} />
         </div>
       </div>
     );
