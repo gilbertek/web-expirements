@@ -7,13 +7,17 @@ import Header from './common/Header';
 
 class App extends Component {
   render() {
-    return(
+    return (
       <div className='container-fluid'>
         <div className='row'>
           <Header />
 
-          <Route exact path='/' component={HomePage} />
-          <Route path='/about' component={AboutPage} />
+          <Route exact
+            path='/'
+            component={HomePage} />
+          <Route
+            path='/about'
+            component={AboutPage} />
         </div>
       </div>
     );

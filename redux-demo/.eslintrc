@@ -20,18 +20,17 @@
   "env": {
     "es6": true,
     "browser": true,
-    "jquery": true
+    "jquery": true,
     "mocha": true,
-    "node": true,
+    "node": true
   },
   "rules": {
     "key-spacing"          : "off",
     "jsx-quotes"           : [2, "prefer-single"],
     "max-len"              : [2, 120, 2],
     "object-curly-spacing" : [2, "always"],
-    "comma-dangle"         : ["error"],
     "complexity"           : ["warn", 10],
-    "no-var"               : "error"
+    "no-var"               : "error",
     "comma-dangle"         : [ "error", "only-multiline" ],
     "keyword-spacing"      : "warn",
     "indent"               : [ "warn", 2 ],
@@ -47,7 +46,6 @@
     "no-case-declarations" : "error",
     "no-fallthrough"       : "error",
     "object-shorthand"     : "error",
-    "object-curly-spacing" : [ "warn", "always" ],
     "arrow-spacing"        : [
       "warn",
       {
