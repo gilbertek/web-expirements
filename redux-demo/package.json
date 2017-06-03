@@ -8,10 +8,10 @@
 		"start": "npm-run-all --parallel compile lint:watch test:watch",
 		"compile": "webpack-dev-server --color --open",
 		"lint": "eslint .",
-		"lint:watch": "node_modules/eslint-watch/bin/esw -w src webpack.config.*",
+		"lint:watch": "node_modules/eslint-watch/bin/esw -w src test webpack.config.*",
 		"lint:fix": "yarn run lint -- --fix",
 		"test": "mocha",
-		"test:watch": "yarn run test -- --watch"
+		"test:watch": "yarn test -- --watch"
 	},
 	"dependencies": {
 		"prop-types": "^15.5.10",
@@ -34,7 +34,7 @@
 		"babel-preset-stage-0": "^6.24.1",
 		"babel-register": "^6.24.1",
 		"chai": "^4.0.1",
-		"css-loader": "^0.28.3",
+		"css-loader": "^0.28.4",
 		"enzyme": "^2.8.2",
 		"eslint": "^3.19.0",
 		"eslint-plugin-babel": "^4.1.1",
