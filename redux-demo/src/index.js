@@ -6,6 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import store from './store';
+import '../public/css/styles.css';
 
 syncHistoryWithStore(createBrowserHistory(), store);
 
