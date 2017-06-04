@@ -7,6 +7,7 @@
 	"scripts": {
 		"start": "npm-run-all --parallel compile lint:watch test:watch",
 		"compile": "webpack-dev-server --color --open",
+		"dashboard": "webpack-dashboard -- webpack-dev-server --color --open",
 		"lint": "eslint .",
 		"lint:watch": "node_modules/eslint-watch/bin/esw -w src test webpack.config.*",
 		"lint:fix": "yarn run lint -- --fix",
@@ -56,6 +57,7 @@
 		"style-loader": "^0.18.1",
 		"url-loader": "^0.5.8",
 		"webpack": "^2.6.1",
+		"webpack-dashboard": "^0.4.0",
 		"webpack-dev-server": "^2.4.5"
 	}
 }
