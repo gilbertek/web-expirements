@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import store from './store';
 import '../public/css/styles.css';
@@ -16,11 +15,9 @@ const root = document.getElementById('app-container');
 
 const render = (Component) => {
   ReactDOM.render(
-    <Router>
-      <Provider store={store}>
-        <Component />
-      </Provider>
-    </Router>,
+    <Provider store={store}>
+      <Component />
+    </Provider>,
     root
   );
 };

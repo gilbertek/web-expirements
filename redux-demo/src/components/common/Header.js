@@ -8,6 +8,10 @@ const Header = () => (
         activeClassName='active'>Home</NavLink>
       { ' | ' }
       <NavLink exact
+        to='/courses'
+        activeClassName='active'>Courses</NavLink>
+      { ' | ' }
+      <NavLink exact
         to='/about'
         activeClassName='active'>About</NavLink>
     </nav>
