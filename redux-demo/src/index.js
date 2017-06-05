@@ -5,11 +5,14 @@ import { createBrowserHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
 import App from './components/App';
 import store from './store';
+import { loadCourses } from './reducer/courses/actions';
 import '../public/css/styles.css';
 
 syncHistoryWithStore(createBrowserHistory(), store);
 
-store.dispatch(() => {});
+store.dispatch(
+  loadCourses()
+);
 
 const root = document.getElementById('app-container');
 
