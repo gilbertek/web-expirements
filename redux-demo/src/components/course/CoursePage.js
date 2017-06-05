@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createCourse } from '../../reducer/courses/actions';
+import CourseList from './CourseList';
 
 class CoursePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      course: { title: '' }
+      course: { title: '' },
+      courses: []
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
 
   onChange(event) {
     const course = this.state.course;
@@ -25,20 +28,16 @@ class CoursePage extends Component {
     event.preventDefault();
     const { course } = this.state;
     this.props.createCourse(course);
-    this.setState({ course });
-  }
-
-  courseRow(course, index) {
-    return <div key={index}>{course.title}</div>;
+    this.setState({ courses: [course] });
   }
 
   render() {
-    console.log(this.props);
+    const { courses } = this.props;
 
     return (
       <div className=''>
         <h1>Courses</h1>
-        {this.props.courses.map(this.courseRow)}
+        <CourseList courses={courses} />
 
         <h2>Add Course</h2>
 
@@ -60,8 +59,8 @@ CoursePage.propTypes = {
   course: PropTypes.shape({
     title: PropTypes.string.isRequired
   }),
-  courses: PropTypes.array,
-  createCourse: PropTypes.func
+  courses: PropTypes.array.isRequired,
+  createCourse: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
