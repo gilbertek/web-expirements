@@ -25,7 +25,7 @@ class CoursePage extends Component {
   }
 }
 
-CoursePage.PropTypes = {
+CoursePage.propTypes = {
   course: PropTypes.shape({
     title: PropTypes.string.isRequired
   }),
