@@ -9,6 +9,7 @@ import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
 // import Header from './common/Header';
 import CoursePage from './course/CoursePage';
+import ManageCoursePage from './course/ManageCoursePage';
 
 class App extends Component {
   render() {
@@ -24,6 +25,12 @@ class App extends Component {
               <Route
                 path='/courses'
                 component={CoursePage} />
+              <Route
+                path='/course'
+                component={ManageCoursePage} />
+              <Route
+                path='/course/:id'
+                component={ManageCoursePage} />
               <Route
                 path='/about'
                 component={AboutPage} />
