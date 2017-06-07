@@ -5,9 +5,7 @@ export const FETCH_COURSES_SUCCESS = 'FETCH_COURSES_SUCCESS';
 export const CREATE_COURSE = 'CREATE_COURSE';
 
 // Actions
-export function fetchCoursesSuccess(courses) {
-  return { type: FETCH_COURSES_SUCCESS, courses };
-}
+export const fetchCoursesSuccess = (courses) => ({ type: FETCH_COURSES_SUCCESS, courses });
 
 export function createCourse(course) {
   return { type: CREATE_COURSE, course };
