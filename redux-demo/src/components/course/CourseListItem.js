@@ -14,7 +14,7 @@ const CourseListItem = ({ course }) => {
       </td>
       <td>
         <Link
-          to={`/courses/${course.id}`}>
+          to={`/course/${course.id}`}>
           {course.id}
         </Link>
       </td>

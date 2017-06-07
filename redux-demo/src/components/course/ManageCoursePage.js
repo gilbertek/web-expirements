@@ -1,47 +1,70 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import styles from './ManageCoursePage.css';
+import CourseForm from './CourseForm';
+import { loadAuthors } from '../../reducer/authors/actions';
 
 class ManageCoursePage extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      course: Object.assign({}, this.props.course),
+      authors: [],
+      errors: {}
+    };
+  }
+
+  componentDidMount() {
+    const { loadAuthors } = this.props;
+    loadAuthors();
   }
 
   render() {
     return (
       <div className='manage-course-page'>
-        <h1>
-          Manage Courses
-        </h1>
-
-        <input
-          type='text'
-          onChange={this.onChange}
-          value={this.state.course.title} />
-
-        <input
-          type='submit'
-          value='Save'
-          onClick={this.onSubmit} />
+        <CourseForm
+          course={this.state.course}
+          errors={this.state.errors}
+          allAuthors={this.props.authors} />
       </div>
     );
   }
 }
 
-ManageCoursePage.PropTypes = {
-
+ManageCoursePage.propTypes = {
+  course: PropTypes.object.isRequired,
+  authors: PropTypes.array.isRequired,
+  loadAuthors: PropTypes.func,
+  errors: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
+  const course = {
+                  id: '',
+                  watchHref: '',
+                  title: '',
+                  authorId: '',
+                  length: '',
+                  category: ''
+              };
+
+  const authorsFormattedForDropdown = state.authors.map(author => {
+    return {
+      value: author.id,
+      text: `${author.firstName} ${author.lastName}`
+    };
+  });
+
   return {
-    state
+    course,
+    authors: authorsFormattedForDropdown
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch
+    loadAuthors: () => dispatch(loadAuthors())
   };
 };
 
