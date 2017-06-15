@@ -25,6 +25,12 @@ class ManageCoursePage extends Component {
     loadAuthors();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.course.id != nextProps.course.id) {
+      this.setState({ course: Object.assign({}, nextProps.course) });
+    }
+  }
+
   updateCourseState(event) {
     const field = event.target.name;
     const course = this.state.course;
@@ -69,12 +75,11 @@ function getCourseById(courses, id) {
 }
 
 const mapStateToProps = (state, match) => {
-  // console.log(ownProps);
 
-  console.log('MATCH', match);
-  console.log('MATCH ID', match.params.id);
+  // console.log('MATCH', match);
+  // console.log('MATCH ID', match.params.id);
 
-  const courseId = ownProps.params.id; // From the path `course/:id`
+  const courseId = match.params.id; // From the path `course/:id`
   let course = {
                   id: '',
                   watchHref: '',
