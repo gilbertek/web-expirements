@@ -48,7 +48,14 @@
 		"jsdom": "^11.0.0",
 		"mocha": "^3.4.2",
 		"npm-run-all": "^4.0.2",
-		"postcss-loader": "^2.0.5",
+		"postcss": "^6.0.2",
+		"postcss-browser-reporter": "^0.5.0",
+		"postcss-cssnext": "^2.11.0",
+		"postcss-import": "^10.0.0",
+		"postcss-loader": "^2.0.6",
+		"postcss-nested": "^2.0.2",
+		"postcss-reporter": "^4.0.0",
+		"postcss-url": "^7.0.0",
 		"react-addons-test-utils": "^15.5.1",
 		"react-hot-loader": "next",
 		"react-test-renderer": "^15.5.4",
@@ -59,5 +66,8 @@
 		"webpack": "^2.6.1",
 		"webpack-dashboard": "^0.4.0",
 		"webpack-dev-server": "^2.4.5"
-	}
+	},
+  "optionalDependencies": {
+    "fsevents": "*"
+  }
 }
