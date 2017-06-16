@@ -76,10 +76,6 @@ function getCourseById(courses, id) {
 
 const mapStateToProps = (state, { match }) => {
 
-  console.log('MATCH', match);
-  console.log('STATE', state);
-  // console.log('MATCH ID', match.params.id);
-
   const courseId = match.params.id; // From the path `course/:id`
   let course = {
                   id: '',
