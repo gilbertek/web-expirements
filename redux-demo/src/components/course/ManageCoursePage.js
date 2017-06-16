@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { push } from 'react-router-redux';
+import { push, dispatch } from 'react-router-redux';
 import CourseForm from './CourseForm';
 import { loadAuthors } from '../../reducer/authors/actions';
 import { saveCourse } from '../../reducer/courses/actions';
@@ -74,9 +74,10 @@ function getCourseById(courses, id) {
   return course ? course[0] : null;
 }
 
-const mapStateToProps = (state, match) => {
+const mapStateToProps = (state, { match }) => {
 
-  // console.log('MATCH', match);
+  console.log('MATCH', match);
+  console.log('STATE', state);
   // console.log('MATCH ID', match.params.id);
 
   const courseId = match.params.id; // From the path `course/:id`
