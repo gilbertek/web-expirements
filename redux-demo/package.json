@@ -67,7 +67,7 @@
 		"webpack-dashboard": "^0.4.0",
 		"webpack-dev-server": "^2.4.5"
 	},
-  "optionalDependencies": {
-    "fsevents": "*"
-  }
+	"optionalDependencies": {
+		"fsevents": "*"
+	}
 }

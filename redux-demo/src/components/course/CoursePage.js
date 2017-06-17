@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CourseList from './CourseList';
 
 class CoursePage extends Component {
@@ -12,14 +12,7 @@ class CoursePage extends Component {
       course: { title: '' },
       courses: []
     };
-
-    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
   }
-
-  redirectToAddCoursePage() {
-    return <Redirect to={{ pathname: '/course' }} />;
-  }
-
 
   render() {
     const { courses } = this.props;
@@ -28,11 +21,9 @@ class CoursePage extends Component {
       <div className=''>
         <h1>Courses</h1>
 
-        <input
-          type='submit'
-          value='Add Course'
-          className='btn btn-primary'
-          onClick={this.redirectToAddCoursePage} />
+        <Link
+          to='/course'
+          className='btn btn-primary'>Add Course</Link>
 
         <CourseList courses={courses} />
       </div>

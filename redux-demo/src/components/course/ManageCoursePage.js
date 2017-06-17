@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push, dispatch } from 'react-router-redux';
+import { Redirect } from 'react-router-dom';
 import CourseForm from './CourseForm';
 import { loadAuthors } from '../../reducer/authors/actions';
 import { saveCourse } from '../../reducer/courses/actions';
@@ -13,7 +13,8 @@ class ManageCoursePage extends Component {
     this.state = {
       course: Object.assign({}, this.props.course),
       authors: [],
-      errors: {}
+      errors: {},
+      redirectToReferrer: false
     };
 
     this.updateCourseState = this.updateCourseState.bind(this);
@@ -35,7 +36,10 @@ class ManageCoursePage extends Component {
     const field = event.target.name;
     const course = this.state.course;
     course[field] = event.target.value;
-    return this.setState({ course });
+    return this.setState({
+      course,
+      redirectToReferrer: true
+    });
   }
 
   saveCourse(event) {
@@ -43,11 +47,18 @@ class ManageCoursePage extends Component {
 
     const { saveCourse } = this.props;
     saveCourse(this.state.course);
-
-    // dispatch(push('/courses'));
+    this.setState({ redirectToReferrer: true });
   }
 
   render() {
+    console.log('props::', this.props );
+
+    const { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) {
+      return <Redirect to='/courses' />;
+    }
+
     return (
       <div className='manage-course-page'>
         <CourseForm
@@ -75,6 +86,8 @@ function getCourseById(courses, id) {
 }
 
 const mapStateToProps = (state, { match }) => {
+  console.log("MATCH::", match);
+  console.log("STATE::", state);
 
   const courseId = match.params.id; // From the path `course/:id`
   let course = {

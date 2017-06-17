@@ -24,6 +24,9 @@ class App extends Component {
             <Route
               path='/courses'
               component={CoursePage} />
+            <Route exact
+              path='/course'
+              component={ManageCoursePage} />
             <Route
               path='/course/:id'
               component={ManageCoursePage} />
