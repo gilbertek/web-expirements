@@ -2,6 +2,8 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = {
   context: resolve(__dirname, 'src'),
   devtool: 'inline-source-map',
@@ -27,10 +29,20 @@ module.exports = {
         test: /\.s?css$/,
         use: [ 'style-loader', 'css-loader?modules', 'postcss-loader' ]
       },
+      {
+        test:   /\.(ttf|otf|eot|svg|woff)$/,
+        loader: "url-loader",
+        options:  {
+          limit: 10000,
+          name: "[name].[ext]",
+          mimetype: 'application/x-font-woff'
+        }
+      }
     ],
   },
   devServer: {
     hot: true,
+    overlay: false,
     historyApiFallback: true,
     inline: true,
     publicPath: '/',
@@ -40,8 +52,12 @@ module.exports = {
     // enable HMR globally
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify('production') }
+    }),
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
     })
-  ],
+  ]
 };
