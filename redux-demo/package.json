@@ -12,7 +12,15 @@
 		"lint:watch": "node_modules/eslint-watch/bin/esw -w src test webpack.config.*",
 		"lint:fix": "yarn run lint -- --fix",
 		"test": "mocha",
-		"test:watch": "yarn test -- --watch"
+		"test:watch": "yarn test -- --watch",
+		"precommit": "lint-staged",
+		"dist": "webpack -p"
+	},
+	"lint-staged": {
+		"*.js": [
+			"prettier --write",
+			"git add"
+		]
 	},
 	"dependencies": {
 		"prop-types": "^15.5.10",
@@ -49,13 +57,11 @@
 		"mocha": "^3.4.2",
 		"npm-run-all": "^4.0.2",
 		"postcss": "^6.0.2",
-		"postcss-browser-reporter": "^0.5.0",
 		"postcss-cssnext": "^2.11.0",
 		"postcss-import": "^10.0.0",
 		"postcss-loader": "^2.0.6",
-		"postcss-nested": "^2.0.2",
-		"postcss-reporter": "^4.0.0",
 		"postcss-url": "^7.0.0",
+		"prettier": "^1.4.4",
 		"react-addons-test-utils": "^15.5.1",
 		"react-hot-loader": "next",
 		"react-test-renderer": "^15.5.4",
