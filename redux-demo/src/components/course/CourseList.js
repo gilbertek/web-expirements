@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CourseListItem from './CourseListItem';
 
-const CourseList = ({ courses, deleteCourse }) => {
+const CourseList = ({ courses }) => {
   return (
     <div className='course-list'>
       <table className='table table-striped'>

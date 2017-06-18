@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import CourseForm from './CourseForm';
 import { loadAuthors } from '../../reducer/authors/actions';
 import { saveCourse } from '../../reducer/courses/actions';
+
+import Debug from '../common/Debug';
 
 class ManageCoursePage extends Component {
   constructor(props) {
@@ -36,31 +37,24 @@ class ManageCoursePage extends Component {
     const field = event.target.name;
     const course = this.state.course;
     course[field] = event.target.value;
-    return this.setState({
-      course,
-      redirectToReferrer: true
-    });
+    return this.setState({ course });
   }
 
   saveCourse(event) {
     event.preventDefault();
+    this.props.saveCourse(this.state.course).
+      then(() => this.redirect());
+  }
 
-    const { saveCourse } = this.props;
-    saveCourse(this.state.course);
-    this.setState({ redirectToReferrer: true });
+  redirect() {
+    this.props.history.push('/courses');
   }
 
   render() {
-    console.log('props::', this.props );
-
-    const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) {
-      return <Redirect to='/courses' />;
-    }
-
     return (
       <div className='manage-course-page'>
+        <Debug />
+
         <CourseForm
           course={this.state.course}
           errors={this.state.errors}
@@ -73,11 +67,12 @@ class ManageCoursePage extends Component {
 }
 
 ManageCoursePage.propTypes = {
-  course: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired,
+  course:      PropTypes.object.isRequired,
+  authors:     PropTypes.array.isRequired,
   loadAuthors: PropTypes.func,
-  saveCourse: PropTypes.func,
-  errors: PropTypes.object
+  saveCourse:  PropTypes.func,
+  history:     PropTypes.object,
+  errors:      PropTypes.object
 };
 
 function getCourseById(courses, id) {
@@ -86,8 +81,6 @@ function getCourseById(courses, id) {
 }
 
 const mapStateToProps = (state, { match }) => {
-  console.log("MATCH::", match);
-  console.log("STATE::", state);
 
   const courseId = match.params.id; // From the path `course/:id`
   let course = {
@@ -123,4 +116,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManageCoursePage);
