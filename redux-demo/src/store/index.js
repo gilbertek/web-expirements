@@ -13,7 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 /* eslint-disable no-undef */
 if (process.env.NODE_ENV !== 'production') {
-  middleware.push(logger);
+  middlewares.push(logger);
 }
 /* eslint-enable */
 
