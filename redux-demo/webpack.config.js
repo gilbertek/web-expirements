@@ -54,7 +54,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify('production') }
+      // 'process.env': { NODE_ENV: JSON.stringify('production') }
     }),
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')

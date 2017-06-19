@@ -5,7 +5,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
 
-const middleware = [thunk];
+const routeMiddleware = routerMiddleware(browserHistory);
+const middlewares = [thunk, routeMiddleware];
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -21,7 +22,7 @@ export const browserHistory = createBrowserHistory();
 export default createStore(
   reducer,
   composeEnhancers(
-    applyMiddleware(routerMiddleware(browserHistory), ...middleware)
+    applyMiddleware(...middlewares)
   )
 );
 
