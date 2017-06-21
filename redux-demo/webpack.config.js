@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -59,6 +60,18 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: false,
+      debug: true,
+      noInfo: true, // set to false to see a list of every file being bundled.
+      options: {
+        sassLoader: {
+          includePaths: [resolve(__dirname, 'src', 'scss')]
+        },
+        context: '/',
+        postcss: () => [autoprefixer],
+      }
     })
   ]
 };
