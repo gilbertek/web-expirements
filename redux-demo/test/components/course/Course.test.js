@@ -33,11 +33,19 @@ describe('Course Component', () => {
 
   it('sets error message when title is empty', () => {
     const courseForm = wrapper.find(CourseForm);
-    const saveButton = courseForm.find('input').last();
+    const saveButton = courseForm.find('input').first();
+
+    console.log(wrapper.state);
 
     // expect(saveButton.prop('type')).toBe('submit');
     // console.log(saveButton.props().value);
-    // console.log(saveButton);
+    // console.log('saveButton', saveButton);
+
+    // console.log('courseForm', courseForm.find('h1'));
+    // console.log('wrapper', wrapper.debug());
+
+
+    // console.log(wrapper.debug());
 
     // saveButton.simulate('click');
     // expect(wrapper.state().errors.title).toBe('Title must be at least 5 characters.');

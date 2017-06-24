@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import CourseForm from './CourseForm';
 import { loadAuthors } from '../../reducer/authors/actions';
 import { saveCourse } from '../../reducer/courses/actions';
-
 import Debug from '../common/Debug';
 
-class ManageCoursePage extends Component {
+export class ManageCoursePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      course: Object.assign({}, this.props.course),
-      authors: [],
-      errors: {},
+      course:             Object.assign({}, this.props.course),
+      authors:            [],
+      errors:             {},
       redirectToReferrer: false
     };
 
@@ -40,17 +39,6 @@ class ManageCoursePage extends Component {
     return this.setState({ course });
   }
 
-  saveCourse(event) {
-    event.preventDefault();
-
-    if (!this.validateCourseForm()) {
-      return;
-    }
-
-    this.props.saveCourse(this.state.course).
-      then(() => this.redirect());
-  }
-
   validateCourseForm() {
     let isValid = true;
     const errors = {};
@@ -64,6 +52,17 @@ class ManageCoursePage extends Component {
     return isValid;
   }
 
+  saveCourse(event) {
+    event.preventDefault();
+
+    if (!this.validateCourseForm()) {
+      return false;
+    }
+
+    this.props.saveCourse(this.state.course).
+      then(() => this.redirect());
+  }
+
   redirect() {
     this.props.history.push('/courses');
   }
@@ -71,7 +70,7 @@ class ManageCoursePage extends Component {
   render() {
     return (
       <div className='manage-course-page'>
-        <Debug />
+        {/*<Debug />*/}
 
         <CourseForm
           course={this.state.course}
@@ -84,13 +83,18 @@ class ManageCoursePage extends Component {
   }
 }
 
+ManageCoursePage.defaultProps = {
+  errors:  {},
+  authors: [],
+  course:  {}
+};
+
 ManageCoursePage.propTypes = {
   course:      PropTypes.object.isRequired,
   authors:     PropTypes.array.isRequired,
   loadAuthors: PropTypes.func,
   saveCourse:  PropTypes.func,
-  history:     PropTypes.object,
-  errors:      PropTypes.object
+  history:     PropTypes.object
 };
 
 function getCourseById(courses, id) {
@@ -99,9 +103,6 @@ function getCourseById(courses, id) {
 }
 
 const mapStateToProps = (state, { match }) => {
-  console.log('CURRENT STATE::', state);
-  console.log('MATCH::', match);
-
   const courseId = match.params.id; // From the path `course/:id`
   let course = {
                   id: '',

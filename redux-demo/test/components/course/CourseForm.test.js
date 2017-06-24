@@ -32,7 +32,4 @@ describe('CourseForm', () => {
     const wrapper = setup(true);
     expect(wrapper.find('input').props().value).toBe('Saving');
   });
-
 });
-
-
