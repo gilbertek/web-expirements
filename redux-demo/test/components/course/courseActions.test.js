@@ -31,10 +31,11 @@ describe('Course Actions', () => {
 
 });
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
 
 describe('Async actions', () => {
+  const middlewares = [thunk];
+  const mockStore = configureMockStore(middlewares);
+
   afterEach(() => {
     nock.cleanAll();
   });
@@ -46,13 +47,18 @@ describe('Async actions', () => {
 
     const expectedActions = [
       // { type: BEGIN_AJAX_CALL },
-      { type: FETCH_COURSES_SUCCESS, body: { courses: [{ id: 'clean-code', title: 'Clen Code' }] } }
+      {
+        type: FETCH_COURSES_SUCCESS,
+        body: { courses: [{ id: 'clean-code', title: 'Clen Code' }] }
+      }
     ];
 
     const store = mockStore({ courses: [] }, expectedActions);
     // store.dispatch(fetchCoursesSuccess()).then(() => {
     //   const actions = store.getActions();
-    //   expect(actions[0].type).toEqual(FETCH_COURSES_SUCCESS);
+    //   console.log(actions);
+    //
+    // //   expect(actions[0].type).toEqual(FETCH_COURSES_SUCCESS);
     //   done();
     // });
   });

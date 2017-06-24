@@ -5,8 +5,8 @@
 	"author": "Gilbert Ekoue",
 	"license": "MIT",
 	"scripts": {
-		"start": "npm-run-all --parallel compile lint:watch test:watch",
-		"compile": "webpack-dev-server --color --open",
+		"start": "npm-run-all --parallel dev lint:watch test:watch",
+		"dev": "webpack-dev-server -d --progress --color --open",
 		"dashboard": "webpack-dashboard -- webpack-dev-server --color --open",
 		"lint": "eslint .",
 		"lint:watch": "node_modules/eslint-watch/bin/esw -w src test webpack.config.*",
@@ -14,7 +14,8 @@
 		"test": "mocha",
 		"test:watch": "yarn test -- --watch",
 		"precommit": "lint-staged",
-		"dist": "webpack -p"
+		"dist": "webpack -p",
+		"build": "webpack -p --progress"
 	},
 	"lint-staged": {
 		"*.js": [
@@ -52,6 +53,7 @@
 		"eslint-plugin-react": "^7.1.0",
 		"eslint-watch": "^3.1.0",
 		"expect": "^1.20.2",
+		"extract-text-webpack-plugin": "^2.1.2",
 		"file-loader": "^0.11.2",
 		"html-webpack-plugin": "^2.28.0",
 		"jsdom": "^11.0.0",

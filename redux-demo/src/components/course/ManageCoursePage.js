@@ -42,8 +42,26 @@ class ManageCoursePage extends Component {
 
   saveCourse(event) {
     event.preventDefault();
+
+    if (!this.validateCourseForm()) {
+      return;
+    }
+
     this.props.saveCourse(this.state.course).
       then(() => this.redirect());
+  }
+
+  validateCourseForm() {
+    let isValid = true;
+    const errors = {};
+
+    if (this.state.course.title.length < 5) {
+      errors.title = 'Title must be at least 5 characters.';
+      isValid = false;
+    }
+
+    this.setState({ errors });
+    return isValid;
   }
 
   redirect() {
@@ -81,6 +99,8 @@ function getCourseById(courses, id) {
 }
 
 const mapStateToProps = (state, { match }) => {
+  console.log('CURRENT STATE::', state);
+  console.log('MATCH::', match);
 
   const courseId = match.params.id; // From the path `course/:id`
   let course = {

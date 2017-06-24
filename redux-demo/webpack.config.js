@@ -2,8 +2,10 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development';
+console.log('ENV::', env);
 
 module.exports = {
   context: resolve(__dirname, 'src'),
@@ -28,7 +30,23 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader' ]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader?modules' },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => ([
+                  autoprefixer({
+                    browsers: ['last 2 versions'],
+                    compress: true
+                  })
+                ])
+              }
+            },
+          ]
+        })
       },
       {
         test:   /\.(ttf|otf|eot|svg|woff)$/,
@@ -55,8 +73,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-      // 'process.env': { NODE_ENV: JSON.stringify('production') }
-      __DEV__: true
+      'process.env': { NODE_ENV: JSON.stringify(env) }
     }),
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
@@ -72,6 +89,10 @@ module.exports = {
         context: '/',
         postcss: () => [autoprefixer],
       }
+    }),
+    new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: process.env.NODE_ENV === 'production',
     })
   ]
 };
