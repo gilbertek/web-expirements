@@ -6,16 +6,18 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "npm-run-all --parallel dev lint:watch test:watch",
-		"dev": "webpack-dev-server -d --progress --color --open",
+		"dev": "webpack-dev-server -d --env.platform=browser --env.environment=development --progress --color --open",
+		"compile": "webpack-dev-server --color --open",
 		"dashboard": "webpack-dashboard -- webpack-dev-server --color --open",
-		"lint": "eslint .",
+		"lint": "eslint . && yarn run prettier",
 		"lint:watch": "node_modules/eslint-watch/bin/esw -w src test webpack.config.*",
 		"lint:fix": "yarn run lint -- --fix",
 		"test": "mocha",
 		"test:watch": "yarn test -- --watch",
 		"precommit": "lint-staged",
+    "prettier": "prettier --write ./src/**/*.js ./src/js/**/*.js",
 		"dist": "webpack -p",
-		"build": "webpack -p --progress"
+		"build": "webpack -p --env.environment=production --env.platform=browser --progress"
 	},
 	"lint-staged": {
 		"*.js": [
@@ -48,6 +50,7 @@
 		"enzyme": "^2.9.0",
 		"eslint": "^4.0.0",
 		"eslint-plugin-babel": "^4.1.1",
+		"eslint-plugin-html": "^3.0.0",
 		"eslint-plugin-import": "^2.5.0",
 		"eslint-plugin-promise": "^3.5.0",
 		"eslint-plugin-react": "^7.1.0",
