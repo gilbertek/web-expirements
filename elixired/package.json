@@ -7,7 +7,6 @@
   "scripts": {
     "start": "npm-run-all --parallel dev lint:watch test:watch",
     "dev": "webpack-dev-server -d --env.platform=browser --env.environment=development --progress --color --open",
-    "compile": "webpack-dev-server --color --open",
     "dashboard": "webpack-dashboard -- webpack-dev-server --color --open",
     "lint": "eslint . && yarn run prettier",
     "lint:watch": "node_modules/eslint-watch/bin/esw -w src test webpack.config.*",

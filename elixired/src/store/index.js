@@ -1,6 +1,6 @@
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import reducer from './../reducer';
+import reducers from './../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 export const browserHistory = createBrowserHistory();
 
 export default createStore(
-  reducer,
+  reducers,
   composeEnhancers(
     applyMiddleware(...middlewares)
   )
