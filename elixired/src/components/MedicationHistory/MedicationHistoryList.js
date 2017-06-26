@@ -99,7 +99,7 @@ const MedicationHistoryList = (props) => {
     <div className='medication-history-list'>
       <div className='table-row header'>
         <div className='text'>Medication</div>
-        <div className='text'>Last Fill Date</div>
+        <div className='date-text'>Last Fill Date</div>
         { editMode
           &&
           <div className='text'>Patient Currently Taking?</div>

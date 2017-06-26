@@ -15,18 +15,16 @@ export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case FETCH_MEDICATION_HISTORY_SUCCESS: {
       const medicationRecords = action.payload.Message.Body.RxHistoryResponse;
-      return {
-        ...state,
+      return Object.assign({}, state, {
         fetched: true,
         medicationRecords
-      };
+      });
     }
     case FETCH_MEDICATION_HISTORY_ERROR: {
-      return {
-        ...state,
+      return Object.assign({}, state, {
         fetched: false,
         message: action.message
-      };
+      });
     }
     case UPDATE_MEDICATION_HISTORY_SUCCESS: {
       const medicationRecords = state.medicationRecords;
@@ -38,17 +36,16 @@ export default (state = DEFAULT_STATE, action) => {
         );
         medicationRecords.MedicationDispensed = meds;
       }
-      return {
+      return Object.assign({}, state, {
         fetched:           true,
         medicationRecords: Object.assign({}, medicationRecords)
-      };
+      });
     }
     case UPDATE_MEDICATION_HISTORY_ERROR:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         fetched: false,
         message: action.message
-      };
+      });
     default: {
       return state;
     }

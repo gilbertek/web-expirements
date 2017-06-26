@@ -1,6 +1,7 @@
 import React, { Component } from 'React';
 import ClinicalMedication from './clinicalMedication';
 import MedicationHistory from './MedicationHistory';
+import MedicationHistoryReview from './MedicationHistoryReview';
 
 class App extends Component {
   render() {
@@ -11,7 +12,8 @@ class App extends Component {
       <div className='wrapper'>
         <ClinicalMedication {...props} />
         <MedicationHistory {...props} />
-        <MedicationHistory {...editprops} />
+        {/*<MedicationHistory {...editprops} />*/}
+        <MedicationHistoryReview {...editprops} />
       </div>
     );
   }

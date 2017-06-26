@@ -19,7 +19,7 @@ module.exports = (env = {}) => {
     devtool: 'inline-source-map',
     entry: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:8080',
+      // 'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
       './index.js'
     ],
@@ -89,6 +89,12 @@ module.exports = (env = {}) => {
           }
         }
       ],
+    },
+    resolve: {
+      modules: [
+        resolve(),
+        'node_modules'
+      ]
     },
     devServer: {
       hot: true,

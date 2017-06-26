@@ -6,6 +6,7 @@ import {
 const DEFAULT_STATE = {
   medication_history_records: [],
   fetched:                    false,
+  isFetching:                 false,
   message:                    ''
 };
 
@@ -14,18 +15,16 @@ export default (state = DEFAULT_STATE, action) => {
     case FETCH_CLINICAL_MEDICATIONS_SUCCESS: {
 
       const data = action.payload.clinical_medications;
-      return {
-        ...state,
+      return Object.assign({}, state, {
         fetched:              true,
         clinical_medications: data
-      };
+      });
     }
     case FETCH_CLINICAL_MEDICATIONS_ERROR: {
-      return {
-        ...state,
+      return Object.assign({}, state, {
         fetched: false,
         message: action.message
-      };
+      });
     }
     default: {
       return state;

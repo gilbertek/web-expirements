@@ -27,8 +27,8 @@ export const updateMedicationHistoryError = (error) => ({
   message: error.message || 'Something went wrong'
 });
 
-function fetchMedicationHistoryRecords(memberId) {
-  return dispatch => {
+const fetchMedicationHistoryRecords = (memberId) => {
+  return (dispatch) => {
     return (
       MedicationHistoryApi.fetchMedicationHistoryRecords(memberId)
         .then(
@@ -38,17 +38,17 @@ function fetchMedicationHistoryRecords(memberId) {
         .catch(error => { throw new Error(error); })
     );
   };
-}
+};
 
-function updateMedicationList(medication) {
-  return function(dispatch) {
+const updateMedicationList = (medication) => {
+  return (dispatch) => {
     return deleteMedication(medication)
       .then(
         response => dispatch(updateMedicationHistorySuccess(response)),
         error => dispatch(updateMedicationHistoryError(error)))
       .catch(error => { throw new Error(error); });
   };
-}
+};
 
 function deleteMedication(medication) {
   return new Promise((resolve, reject) => {

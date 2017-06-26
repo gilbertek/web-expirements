@@ -70,7 +70,7 @@ class MedicationHistoryListItem extends Component {
             />
           </a>
         </div>
-        <div className='text'>{med.getLastFillDate()}</div>
+        <div className='date-text'>{med.getLastFillDate()}</div>
 
         { editMode &&
           <div className='text'>

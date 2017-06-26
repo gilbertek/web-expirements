@@ -14,12 +14,12 @@ export const fetchClinicalMedicationsError = (error) => ({
   message: error.message || 'Something went wrong'
 });
 
-export function fetchClinicalMedications(memberId) {
-  return dispatch => {
+export const fetchClinicalMedications = (memberId) => {
+  return (dispatch) => {
     return ClinicalMedicationApi.fetchClinicalMedications(memberId)
       .then(
         payload => dispatch(fetchClinicalMedicationsSuccess(payload)),
         error => dispatch(fetchClinicalMedicationsError(error))
       );
   };
-}
+};
