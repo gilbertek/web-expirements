@@ -5,24 +5,22 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
 
+export const browserHistory = createBrowserHistory();
 const routeMiddleware = routerMiddleware(browserHistory);
-const middlewares = [thunk, routeMiddleware];
+const middleware = [thunk, routeMiddleware];
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 /* eslint-disable no-undef */
 if (process.env.NODE_ENV !== 'production') {
-  middlewares.push(logger);
+  middleware.push(logger);
 }
 /* eslint-enable */
-
-export const browserHistory = createBrowserHistory();
 
 export default createStore(
   reducers,
   composeEnhancers(
-    applyMiddleware(...middlewares)
+    applyMiddleware(...middleware)
   )
 );
-

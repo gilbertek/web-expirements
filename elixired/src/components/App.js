@@ -1,23 +1,20 @@
 import React, { Component } from 'React';
-import {
-  Route,
-  Switch
-} from 'react-router-dom';
-import propTypes from 'prop-types';
+import ClinicalMedication from './clinicalMedication';
+import MedicationHistory from './MedicationHistory';
 
 class App extends Component {
   render() {
+    const props = { memberId: 1, editMode: false };
+    const editprops = { memberId: 1, editMode: true };
+
     return (
-      <div className='container-fluid'>
-        <div className='row'>
-          <h1>Elixir Red</h1>
-        </div>
+      <div className='wrapper'>
+        <ClinicalMedication {...props} />
+        <MedicationHistory {...props} />
+        <MedicationHistory {...editprops} />
       </div>
     );
   }
 }
 
-App.propTypes = {
-  children: propTypes.object
-};
 export default App;

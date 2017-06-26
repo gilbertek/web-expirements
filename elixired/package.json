@@ -25,8 +25,11 @@
     ]
   },
   "dependencies": {
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.0",
+    "react-aria-modal": "^2.6.0",
     "react-dom": "^15.6.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
@@ -58,9 +61,11 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.28.0",
+    "image-webpack-loader": "^3.3.1",
     "jsdom": "^11.0.0",
     "mocha": "^3.4.2",
     "nock": "^9.0.13",
+    "normalize.css": "^7.0.0",
     "npm-run-all": "^4.0.2",
     "postcss": "^6.0.2",
     "postcss-cssnext": "^2.11.0",

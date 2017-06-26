@@ -40,7 +40,7 @@ module.exports = (env = {}) => {
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-              { loader: 'css-loader?modules' },
+              { loader: 'css-loader' },
               {
                 loader: 'postcss-loader',
                 options: {
@@ -54,6 +54,30 @@ module.exports = (env = {}) => {
               },
             ]
           })
+        },
+        {
+          test: /\.(jpe?g|png|gif|svg)$/i,
+          use: [
+            "file-loader?hash=sha512&digest=hex&name=[hash].[ext]",
+            {
+              loader: "image-webpack-loader",
+              options: {
+                mozjpeg: {
+                  progressive: true
+                },
+                gifsicle: {
+                  interlaced: false
+                },
+                optipng: {
+                  optimizationLevel: 4
+                },
+                pngquant: {
+                  quality: "75-90",
+                  speed: 4
+                }
+              }
+            }
+          ]
         },
         {
           test:   /\.(ttf|otf|eot|svg|woff)$/,
@@ -72,7 +96,11 @@ module.exports = (env = {}) => {
       historyApiFallback: true,
       inline: true,
       publicPath: '/',
-      contentBase: resolve(__dirname, 'src')
+      contentBase: resolve(__dirname, 'src'),
+      disableHostCheck: true,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      }
     },
     plugins: [
       // enable HMR globally
@@ -92,13 +120,13 @@ module.exports = (env = {}) => {
         noInfo: true, // set to false to see a list of every file being bundled.
         options: {
           sassLoader: {
-          includePaths: [resolve(__dirname, 'src', 'scss')]
+            includePaths: [resolve(__dirname, 'src', 'scss')]
           },
           context: '/',
           postcss: () => [autoprefixer],
         }
       }),
-      new ExtractTextPlugin('styles.css'),
+      new ExtractTextPlugin('css/app.css'),
       new webpack.optimize.UglifyJsPlugin({
         compress: isProduction,
       })
