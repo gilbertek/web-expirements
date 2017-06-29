@@ -1,5 +1,6 @@
 import React, { Component } from 'React';
 import ClinicalMedication from './ClinicalMedication';
+import ClinicalMedicationForm from './ClinicalMedicationForm';
 import MedicationHistory from './MedicationHistory';
 import MedicationHistoryReview from './MedicationHistoryReview';
 
@@ -11,6 +12,8 @@ class App extends Component {
     return (
       <div className='wrapper'>
         <ClinicalMedication {...props} />
+        <br />
+        <br />
         <MedicationHistory {...props} />
         {/*<MedicationHistory {...editprops} />*/}
         <br />
@@ -19,7 +22,7 @@ class App extends Component {
         <MedicationHistoryReview {...editprops} />
         <br />
         <br />
-
+        <ClinicalMedicationForm />
       </div>
     );
   }
