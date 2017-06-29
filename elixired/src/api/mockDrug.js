@@ -604,13 +604,28 @@ const drugs = {
 
 class DrugsApi {
   static fetchDrugs() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
-        if (Math.random() > 0.1) {
-          reject('Simulation random failure');
-        }
         resolve(Object.assign([], drugs.Drugs));
       }, 1000);
+    });
+  }
+
+  static fetchDrugsByName(query) {
+    return new Promise((resolve,) => {
+      setTimeout(() => {
+        resolve(Object.assign([], this.searchByDrugName(query
+        )));
+      }, 10);
+    });
+  }
+
+  static searchByDrugName(query) {
+    query = query.toLowerCase();
+    return drugs.Drugs.filter((item) => {
+      if (item.DrugName.toLowerCase().indexOf(query) > -1) {
+        return item;
+      }
     });
   }
 }
