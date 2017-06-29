@@ -1,5 +1,5 @@
 import React, { Component } from 'React';
-import ClinicalMedication from './clinicalMedication';
+import ClinicalMedication from './ClinicalMedication';
 import MedicationHistory from './MedicationHistory';
 import MedicationHistoryReview from './MedicationHistoryReview';
 
