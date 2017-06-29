@@ -22,7 +22,6 @@ class App extends Component {
         {/*<MedicationHistory {...editprops} />*/}
         <br />
         <br />
-
         <MedicationHistoryReview {...editprops} />
         <br />
         <br />
