@@ -89,12 +89,15 @@ ClinicalMedicationFormContainer.defaultProps = {
   errors:        {},
   statusList:    [
     { value: 1, text: 'Current' },
-    { value: 2, text: 'Past' },
-    { value: 3, text: 'Never Taken' }
+    { value: 2, text: 'Past' }
   ],
   directionList: [
-    { value: 1, text: '1' },
-    { value: 2, text: '2' }
+    { value: 1, text: 'Daily' },
+    { value: 2, text: 'Twice a day' },
+    { value: 3, text: 'Three times a day' },
+    { value: 4, text: 'Four times a day' },
+    { value: 5, text: 'At Bed time' },
+    { value: 6, text: 'As needed' }
   ],
   medication:    {},
   isSaving:      false,

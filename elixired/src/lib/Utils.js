@@ -8,6 +8,15 @@ const titlelize = (string) =>
       .join(' ')
   );
 
+// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
+const escapeRegexCharacters = (str) =>
+  str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const randomDelay = () =>
+  300 + Math.random() * 1000;
+
 export {
-  titlelize
+  titlelize,
+  escapeRegexCharacters,
+  randomDelay
 };

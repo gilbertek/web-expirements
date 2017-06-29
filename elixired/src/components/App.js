@@ -15,15 +15,15 @@ class App extends Component {
         <ClinicalMedication {...props} />
         <br />
         <br />
+        <ClinicalMedicationForm />
+        <br />
+        <br />
         <MedicationHistory {...props} />
         {/*<MedicationHistory {...editprops} />*/}
         <br />
         <br />
 
         <MedicationHistoryReview {...editprops} />
-        <br />
-        <br />
-        <ClinicalMedicationForm />
         <br />
         <br />
         <Prescription />
