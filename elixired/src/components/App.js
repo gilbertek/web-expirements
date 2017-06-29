@@ -2,6 +2,7 @@ import React, { Component } from 'React';
 import ClinicalMedication from './ClinicalMedication';
 import ClinicalMedicationForm from './ClinicalMedicationForm';
 import MedicationHistory from './MedicationHistory';
+import Prescription from './Prescription';
 import MedicationHistoryReview from './MedicationHistoryReview';
 
 class App extends Component {
@@ -23,6 +24,9 @@ class App extends Component {
         <br />
         <br />
         <ClinicalMedicationForm />
+        <br />
+        <br />
+        <Prescription />
       </div>
     );
   }

@@ -4,7 +4,6 @@ import TextInput from '../Shared/TextInput';
 import SelectInput from '../Shared/SelectInput';
 
 const ClinicalMedicationForm = (props) => {
-  console.log('Current Props', props);
   const {
   medication,
   directionList,

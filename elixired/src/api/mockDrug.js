@@ -600,6 +600,19 @@ const drugs = {
     "GenericID": "50580023424",
     "Specificity": "BRAND"
   }]
-}
-;
+};
 
+class DrugsApi {
+  static fetchDrugs() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.1) {
+          reject('Simulation random failure');
+        }
+        resolve(Object.assign([], drugs.Drugs));
+      }, 1000);
+    });
+  }
+}
+
+export default DrugsApi;
