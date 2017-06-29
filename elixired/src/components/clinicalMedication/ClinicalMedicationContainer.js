@@ -6,7 +6,7 @@ import {
 } from '../../reducers/clinicalMedications/actions';
 import ClinicalMedicationList from './ClinicalMedicationList';
 import FetchApiError from '../Shared/FetchApiError';
-import ClinicalMedicationFormContainer from './ClinicalMedicationFormContainer';
+import SearchBox from '../Shared/SearchBox';
 
 class ClinicalMedicationContainer extends Component {
   constructor(props) {
@@ -14,16 +14,34 @@ class ClinicalMedicationContainer extends Component {
 
     this.state = {
       fetched:              false,
-      clinical_medications: []
+      clinical_medications: [],
+      searchTerm:           ''
     };
   }
 
   componentDidMount() {
-    this.props.fetchClinicalMedications(this.props.memberId);
+    const { searchTerm, memberId, searchDrugByName } = this.props;
+
+    this.props.fetchClinicalMedications(memberId);
+
+    if (searchTerm) {
+      searchDrugByName(searchTerm);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { searchTerm, searchDrugByName } = this.props;
+    if (nextProps.searchTerm !== searchTerm) {
+      searchDrugByName(nextProps.searchTerm);
+    }
+  }
+
+  handleSearch = (searchTerm) => {
+    this.prop.searchDrugByName(searchTerm);
   }
 
   render() {
-    const { fetched, clinicalMedications, errorMessage } = this.props;
+    const { fetched, clinicalMedications, errorMessage, searchTerm } = this.props;
 
     if (errorMessage) {
       return (
@@ -44,6 +62,9 @@ class ClinicalMedicationContainer extends Component {
 
         <br />
         {/* <ClinicalMedicationFormContainer /> */}
+
+        <SearchBox term={searchTerm}
+          handleSearch={this.handleSearch} />
       </div>
     );
   }
@@ -54,7 +75,9 @@ ClinicalMedicationContainer.propTypes = {
   memberId:                 PropTypes.number.isRequired,
   clinicalMedications:      PropTypes.array,
   fetchClinicalMedications: PropTypes.func,
-  errorMessage:             PropTypes.string
+  errorMessage:             PropTypes.string,
+  searchTerm:               PropTypes.string,
+  searchDrugByName:         PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -73,6 +96,9 @@ function mapStateToProps(state) {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchClinicalMedications: () => {
     dispatch(fetchClinicalMedications(ownProps.memberId));
+  },
+  searchDrugByName: () => {
+    new Promise.resolve();
   }
 });
 

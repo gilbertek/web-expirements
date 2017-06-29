@@ -24,43 +24,6 @@ const ClinicalMedication = ({ fetched, clinicalMedications, errorMessage }) => {
   );
 };
 
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       fetched:              false,
-//       clinical_medications: []
-//     };
-//   }
-
-//   componentDidMount() {
-//     this.props.fetchClinicalMedications(this.props.memberId);
-//   }
-
-//   render() {
-//     const { fetched, clinicalMedications, errorMessage } = this.props;
-
-//     if (errorMessage) {
-//       return (
-//         <div className='clinical-medication-list'>
-//           <FetchApiError message={errorMessage} />
-//         </div>
-//       );
-//     }
-
-//     return (
-//       <div className='clinical-medication-list'>
-//         {
-//           fetched &&
-//           <ClinicalMedicationList
-//             medicationList={clinicalMedications}
-//           />
-//         }
-//       </div>
-//     );
-//   }
-// }
-
 ClinicalMedication.propTypes = {
   fetched:                  PropTypes.bool,
   memberId:                 PropTypes.number.isRequired,
