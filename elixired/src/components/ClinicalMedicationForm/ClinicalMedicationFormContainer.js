@@ -18,7 +18,7 @@ class ClinicalMedicationFormContainer extends Component {
     super(props);
 
     this.state = {
-      active:        true,
+      active:        false,
       medication:    Object.assign({}, this.props.medication),
       directionList: [],
       statusList:    [],
