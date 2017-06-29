@@ -13,6 +13,7 @@ const styles = {
     display: 'none'
   },
   columnHalf: {
+    clear:   'both',
     width:   '50%',
     display: 'inline-block'
   }
@@ -62,29 +63,30 @@ class MedicationHistoryListItem extends Component {
     const stateStyle = this.state.active ? styles.active : styles.inactive;
 
     return (
-      <div className='table-row'>
-        <div className='text'>
-          <a onClick={this.toggle}>
-            <PrescriptionHeader
-              title={med.getTitle()}
-            />
-          </a>
-        </div>
-        <div className='date-text'>{med.getLastFillDate()}</div>
-
-        { editMode &&
+      <div className='table-row-wrapper'>
+        <div className='table-row'>
           <div className='text'>
-            <CheckboxOrRadioGroup
-              title={''}
-              setName={'currentlyTaking'}
-              controlFunc={this.handleCheckboxChange}
-              type={'radio'}
-              options={responseOptions}
-              selectedOptions={this.state.selectedOptions}
-            />
+            <a onClick={this.toggle}>
+              <PrescriptionHeader
+                title={med.getTitle()}
+              />
+            </a>
           </div>
-        }
+          <div className='date-text'>{med.getLastFillDate()}</div>
 
+          { editMode &&
+            <div className='text'>
+              <CheckboxOrRadioGroup
+                title={''}
+                setName={'currentlyTaking'}
+                controlFunc={this.handleCheckboxChange}
+                type={'radio'}
+                options={responseOptions}
+                selectedOptions={this.state.selectedOptions}
+              />
+            </div>
+          }
+        </div>
         <div className='med-description-details'
           style={stateStyle}>
           <div style={styles.columnHalf}>

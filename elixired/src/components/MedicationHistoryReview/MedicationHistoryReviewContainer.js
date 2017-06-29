@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AriaModal from 'react-aria-modal';
 import MedicationHistory from '../MedicationHistory';
+import ClinicalMedication from '../ClinicalMedication';
 
 class MedicationHistoryReviewContainer extends Component {
   constructor(props) {
@@ -26,7 +27,6 @@ class MedicationHistoryReviewContainer extends Component {
   };
 
   render() {
-    const { memberId, editMode } = this.props;
     const modal = this.state.modalActive
       ? <AriaModal
           mounted={this.state.modalActive}
@@ -36,14 +36,28 @@ class MedicationHistoryReviewContainer extends Component {
           getApplicationNode={this.getApplicationNode}
           underlayStyle={{ paddingTop: '2em' }}>
           <div className='modal'>
-            <a className='close_modal' href='#' onClick={this.deactivateModal}>x</a>
+            <header className='modal-header'>
+              <h2 id='demo-two-title'
+                className='modal-title'>
+                Medication History Review
+              </h2>
+              <button
+                className='close-button'
+                data-close
+                aria-label='Close modal'
+                type='button'
+                onClick={this.deactivateModal}>
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </header>
+
             <div className='modal-body'>
-              <MedicationHistory
-                memberId={memberId}
-                editMode={editMode} />
+              <ClinicalMedication {...this.props} />
+              <MedicationHistory {...this.props} />
             </div>
             <footer className='modal-footer'>
-              <button id='demo-one-deactivate' onClick={this.deactivateModal}>
+              <button id='demo-one-deactivate'
+                onClick={this.deactivateModal}>
                 deactivate
               </button>
             </footer>

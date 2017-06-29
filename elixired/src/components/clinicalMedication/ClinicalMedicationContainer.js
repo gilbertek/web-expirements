@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchClinicalMedications } from '../../reducers/clinicalMedications/actions';
+import {
+  fetchClinicalMedications
+} from '../../reducers/clinicalMedications/actions';
 import ClinicalMedicationList from './ClinicalMedicationList';
 import FetchApiError from '../Shared/FetchApiError';
+import ClinicalMedicationFormContainer from './ClinicalMedicationFormContainer';
 
 class ClinicalMedicationContainer extends Component {
   constructor(props) {
@@ -38,6 +41,9 @@ class ClinicalMedicationContainer extends Component {
             medicationList={clinicalMedications}
           />
         }
+
+        <br />
+        {/* <ClinicalMedicationFormContainer /> */}
       </div>
     );
   }
@@ -74,29 +80,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ClinicalMedicationContainer);
-
-// import { connect } from 'react-redux';
-// import { fetchClinicalMedications } from '../../reducers/clinicalMedications/actions';
-// import ClinicalMedication from './ClinicalMedication';
-
-// const mapStateToProps = (state, ownProps)  => {
-//   let clinicalMedications;
-//   if (state.clinicalMedications) {
-//     clinicalMedications = state.clinicalMedications.clinical_medications;
-//   }
-
-//   return {
-//     memberId:     ownProps.memberId,
-//     fetched:      state.clinicalMedications.fetched,
-//     errorMessage: state.clinicalMedications.message,
-//     clinicalMedications
-//   };
-// }
-
-
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-//   // { fetchClinicalMedications }
-// )(ClinicalMedication);

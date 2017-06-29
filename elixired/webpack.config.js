@@ -58,9 +58,9 @@ module.exports = (env = {}) => {
         {
           test: /\.(jpe?g|png|gif|svg)$/i,
           use: [
-            "file-loader?hash=sha512&digest=hex&name=[hash].[ext]",
+            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
             {
-              loader: "image-webpack-loader",
+              loader: 'image-webpack-loader',
               options: {
                 mozjpeg: {
                   progressive: true
@@ -72,7 +72,7 @@ module.exports = (env = {}) => {
                   optimizationLevel: 4
                 },
                 pngquant: {
-                  quality: "75-90",
+                  quality: '75-90',
                   speed: 4
                 }
               }
@@ -81,10 +81,10 @@ module.exports = (env = {}) => {
         },
         {
           test:   /\.(ttf|otf|eot|svg|woff)$/,
-          loader: "url-loader",
+          loader: 'url-loader',
           options:  {
             limit: 10000,
-            name: "[name].[ext]",
+            name: '[name].[ext]',
             mimetype: 'application/x-font-woff'
           }
         }
@@ -105,7 +105,7 @@ module.exports = (env = {}) => {
       contentBase: resolve(__dirname, 'src'),
       disableHostCheck: true,
       headers: {
-        "Access-Control-Allow-Origin": "*"
+        'Access-Control-Allow-Origin': '*'
       }
     },
     plugins: [
@@ -135,6 +135,13 @@ module.exports = (env = {}) => {
       new ExtractTextPlugin('css/app.css'),
       new webpack.optimize.UglifyJsPlugin({
         compress: isProduction,
+      }),
+      new webpack.ProvidePlugin({
+        React: 'react',
+        ReactDOM: 'react-dom',
+        PropTypes: 'props-types',
+        Immutable: 'immutable',
+        I: 'immutable'
       })
     ]
   };

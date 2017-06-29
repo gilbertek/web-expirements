@@ -13,7 +13,13 @@ class App extends Component {
         <ClinicalMedication {...props} />
         <MedicationHistory {...props} />
         {/*<MedicationHistory {...editprops} />*/}
+        <br />
+        <br />
+
         <MedicationHistoryReview {...editprops} />
+        <br />
+        <br />
+
       </div>
     );
   }

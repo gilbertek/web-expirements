@@ -26,41 +26,9 @@ const getLastNinetyDays = (args) => {
   return result;
 };
 
-const styles = {
-  columnOneOfThree: {
-    width: '30%'
-  },
-  columnTwoOfThree: {
-    width: '60%'
-  },
-  disclaimer: {
-    marginTop: '50px',
-    marginBottom: '50px',
-  },
-  columnSixtyPercent: {
-    width: '60%'
-  },
-  columnFourtyPercent: {
-    width: '40%'
-  },
-  columnFifTeenPercent: {
-    width: '15%'
-  },
-  columnTwentyPercent: {
-    width: '20%'
-  },
-  columnThirtyPercent: {
-    width: '30%'
-  },
-  columnThirtyFivePercent: {
-    width: '35%'
-  }
-};
-
 const ShowDisclaimer = () =>
   (
-    <div className='disclaimer'
-      style={styles.disclaimer}>
+    <div className='disclaimer'>
       <strong>Disclaimer</strong>
       <p>Certain information may not be available or accurate in this report,
         including items that the patient asked not be disclosed due to
@@ -91,9 +59,6 @@ const MedicationHistoryList = (props) => {
         )
       )
     );
-  const columnStyle = editMode
-                    ? styles.columnTwentyPercent
-                    : styles.columnFortyPercent;
 
   return (
     <div className='medication-history-list'>
