@@ -87,8 +87,15 @@ class ClinicalMedicationFormContainer extends Component {
 
 ClinicalMedicationFormContainer.defaultProps = {
   errors:        {},
-  statusList:    [ {value: 1, text: 'Current'}, {value: 2, text: 'Past'}, {value: 3, text: 'Never Taken'} ],
-  directionList: [ {value: 1, text: '1'}, {value: 2, text: '2'} ],
+  statusList:    [
+    { value: 1, text: 'Current' },
+    { value: 2, text: 'Past' },
+    { value: 3, text: 'Never Taken' }
+  ],
+  directionList: [
+    { value: 1, text: '1' },
+    { value: 2, text: '2' }
+  ],
   medication:    {},
   isSaving:      false,
 };
@@ -111,8 +118,9 @@ const mapStateToProps = (state) => {
   };
 
   return {
-    medication
-  }
+    medication,
+    state
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

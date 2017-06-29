@@ -18,7 +18,7 @@ class ClinicalMedicationContainer extends Component {
   }
 
   componentDidMount() {
-    const { memberId, searchDrugByName } = this.props;
+    const { memberId } = this.props;
 
     this.props.fetchClinicalMedications(memberId);
   }
