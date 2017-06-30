@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SearchBox from '../Shared/SearchBox';
+import DrugList from './DrugList';
 import {
   fetchDrugs,
   fetchDrugsByName
@@ -33,7 +34,7 @@ class PrescriptionContainer extends Component {
   }
 
   render() {
-    const { searchTerm } = this.props;
+    const { searchTerm, searchResult } = this.props;
 
     return (
       <div className='row'>
@@ -41,19 +42,25 @@ class PrescriptionContainer extends Component {
 
         <SearchBox term={searchTerm}
           handleSearch={this.handleSearch} />
+
+        {
+          searchResult.length !== 0 ? <DrugList drugs={searchResult} /> : ''
+        }
       </div>
     );
   }
 }
 
 PrescriptionContainer.defaultProps = {
-  isFetching: false,
-  fetched:    false,
-  drugs:      []
+  isFetching:   false,
+  fetched:      false,
+  drugs:        [],
+  searchResult: []
 };
 
 PrescriptionContainer.propTypes = {
   searchTerm:       PropTypes.string,
+  searchResult:     PropTypes.array,
   drugs:            PropTypes.array.isRequired,
   fetchDrugsByName: PropTypes.func,
   fetchDrugs:       PropTypes.func,
@@ -67,6 +74,7 @@ const mapStateToProps = (state) => (
     fetched:      state.prescription.fetched,
     isFetching:   state.prescription.isFetching,
     drugs:        state.prescription.drugs,
+    searchResult: state.prescription.searchResult,
     errorMessage: state.prescription.message
   }
 );
