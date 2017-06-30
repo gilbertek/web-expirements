@@ -7,7 +7,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import store from './store';
-import '../public/css/app.css';
 
 syncHistoryWithStore(createBrowserHistory(), store);
 
