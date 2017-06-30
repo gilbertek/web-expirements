@@ -118,7 +118,6 @@ module.exports = (env = {}) => {
             includePaths: [resolve(__dirname, 'src', 'scss')]
           },
           context: '/',
-          postcss: () => [autoprefixer],
         }
       }),
       new ExtractTextPlugin('css/app.css'),
