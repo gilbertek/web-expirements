@@ -1,3 +1,13 @@
+const moment = require('moment');
+
+const parseShortDate = (date) => {
+    return moment(date, 'YYYY-MM-DD');
+};
+
+const formatShortDate = (momentDate) => {
+    return momentDate.format('YYYY-MM-DD');
+};
+
 const titlelize = (string) =>
   (
     string
@@ -16,6 +26,8 @@ const randomDelay = () =>
   300 + Math.random() * 1000;
 
 export {
+  parseShortDate,
+  formatShortDate,
   titlelize,
   escapeRegexCharacters,
   randomDelay

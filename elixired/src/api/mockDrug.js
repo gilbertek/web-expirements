@@ -1,5 +1,19 @@
 const drugs = {
-  "Drugs": [{
+  "Drugs": [
+    {
+    "DrugName": "Bylenol",
+    "BrandCode": "6732",
+    "DrugID": "d00049",
+    "SampleNDC": "00045018618",
+    "Category": "miscellaneous analgesics",
+    "CSA": {
+      "min": "0",
+      "max": "0"
+    },
+    "GenericID": "00045018618",
+    "Specificity": "BRAND"
+    },
+    {
     "DrugName": "Tylenol",
     "BrandCode": "6732",
     "DrugID": "d00049",
