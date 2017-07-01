@@ -1,6 +1,6 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Autosuggest from "react-autosuggest";
+import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
 
 class AutoSuggestInput extends Component {

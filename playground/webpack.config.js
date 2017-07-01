@@ -2,12 +2,25 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env = {}) => {
   // Variables set by npm scripts in package.json
   const platform = env.platform; // 'browser' by default
   const environment = env.environment;
   const isProduction = environment === 'production';
+
+  const prodPlugins = [];
+  if (isProduction) {
+    // Production optimization
+    prodPlugins.push(
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        filename: 'vendor.[hash].js',
+        minChunks: Infinity,
+      }),
+    );
+  }
 
   /* eslint-disable no-console */
   console.log(`Running webpack in ${environment} mode on ${platform ? 'browser': 'server'}`);
@@ -16,16 +29,32 @@ module.exports = (env = {}) => {
   return {
     context: resolve(__dirname, 'src'),
     devtool: 'inline-source-map',
-    entry: [
-      'react-hot-loader/patch',
-      // 'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server',
-      './index.js'
-    ],
+    entry: {
+      app: [
+        './styles/app.scss',
+        'react-hot-loader/patch',
+        // 'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
+        './index.js'
+      ],
+      vendor: [
+        'react',
+        'react-dom',
+        'react-router-dom'
+      ]
+    },
     output: {
-      filename: 'bundle.js',
+      filename: isProduction ? 'js/[name].[chunkhash].js' : 'js/[name].js',
       path: resolve(__dirname, 'public'),
       publicPath: '/'
+    },
+    resolve: {
+      extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
+      modules: [
+        'node_modules',
+        resolve(__dirname, 'src'),
+        resolve(),
+      ]
     },
     module: {
       rules: [
@@ -79,12 +108,6 @@ module.exports = (env = {}) => {
         }
       ],
     },
-    resolve: {
-      modules: [
-        resolve(),
-        'node_modules'
-      ]
-    },
     devServer: {
       hot: true,
       overlay: false,
@@ -97,6 +120,15 @@ module.exports = (env = {}) => {
         'Access-Control-Allow-Origin': '*'
       }
     },
+    performance: {
+      hints: 'warning', // enum
+      maxAssetSize: 200000, // int (in bytes),
+      maxEntrypointSize: 400000, // int (in bytes)
+      assetFilter: (assetFilename) => {
+        // Function predicate that provides asset filenames
+        return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
+      }
+    },
     plugins: [
       // enable HMR globally
       new webpack.HotModuleReplacementPlugin(),
@@ -105,9 +137,6 @@ module.exports = (env = {}) => {
       new webpack.DefinePlugin({
         ENVIRONMENT: JSON.stringify(environment),
         PLATFORM:    JSON.stringify(platform)
-      }),
-      new HtmlWebpackPlugin({
-        template: resolve(__dirname, 'src', 'index.html')
       }),
       new webpack.LoaderOptionsPlugin({
         minimize: false,
@@ -120,7 +149,7 @@ module.exports = (env = {}) => {
           context: '/',
         }
       }),
-      new ExtractTextPlugin('css/app.css'),
+      new ExtractTextPlugin({ filename: 'css/[name].css', allChunks: true }),
       new webpack.optimize.UglifyJsPlugin({
         compress: isProduction,
       }),
@@ -130,7 +159,16 @@ module.exports = (env = {}) => {
         PropTypes: 'props-types',
         Immutable: 'immutable',
         I: 'immutable'
-      })
+      }),
+      new HtmlWebpackPlugin({
+        template: resolve(__dirname, 'src', 'index.html')
+      }),
+
+      // new CopyWebpackPlugin([
+      //    { from: 'src/assets/fonts', to: 'public/fonts' },
+      //    { from: 'src/assets/img/', to: 'public/img' }
+      // ])
+      ...prodPlugins
     ]
   };
 };

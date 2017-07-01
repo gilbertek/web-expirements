@@ -1,3 +1,14 @@
+import constants from "./constants";
+
+/*
+STATE STRUCTURE
+*/
+const initialState = {
+	value: '',
+	suggestions: []
+};
+
+
 // ct-autosuggest helper functions
 // -------------------------------- |)}>#
 function escapeRegexCharacters(str) {
@@ -15,22 +26,33 @@ function updateSuggestions(autosuggest, action) {
 	if (autosuggest.value !== action.value)
 		return autosuggest;
 	else
-		return update(autosuggest, {
-			suggestions: { $set: getSuggestions(action.value) }
-		});
+		return {
+      ...autosuggest,
+      suggestions: getSuggestions(action.value)
+		};
 }
 
-export default function autosuggest(autosuggest={}, action) {
+export default function autosuggest(autosuggest = initialState, action) {
 	switch(action.type) {
 		case constants.UPDATE_SUGGESTION_VALUE:
-			return update(autosuggest, {
-				value: { $set: action.value }
-			} );
+      console.log('UPDATE_SUGGESTION_VALUE');
+			return {
+        ...autosuggest,
+				value: action.value
+			};
 		case constants.UPDATE_SUGGESTIONS:
+      console.log('UPDATE_SUGGESTIONS');
+
 			return updateSuggestions(autosuggest, action);
 		case constants.CLEAR_SUGGESTIONS:
-			return update(autosuggest, {suggestions: { $set: [] }});
+      console.log('CLEAR_SUGGESTIONS');
+
+			return {
+        ...autosuggest,
+        suggestions:  []
+      };
 		default:
+      console.log('DEFAULT', autosuggest);
 			return autosuggest;
 	}
 }

@@ -1,5 +1,5 @@
 --compilers js:babel-core/register,jsx:babel-core/register
 --require test/setup.js
-
+--require expect
 --recursive
 --full-trace
