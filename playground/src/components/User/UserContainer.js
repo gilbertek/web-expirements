@@ -56,8 +56,6 @@ class UserContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps);
-
     if (this.props.employees !== nextProps.employees) {
       this.setState({
         suggestions: nextProps.employees,

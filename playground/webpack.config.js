@@ -18,8 +18,11 @@ module.exports = (env = {}) => {
         name: 'vendor',
         filename: 'vendor.[hash].js',
         minChunks: Infinity,
-      }),
+      })
     );
+
+    prodPlugins.push(
+      new webpack.optimize.AggressiveMergingPlugin());
   }
 
   /* eslint-disable no-console */
@@ -69,7 +72,7 @@ module.exports = (env = {}) => {
             fallback: 'style-loader',
             use: [
               { loader: 'css-loader' },
-              { loader: 'postcss-loader' },
+              { loader: 'postcss-loader' }
             ]
           })
         },
