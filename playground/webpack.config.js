@@ -10,21 +10,6 @@ module.exports = (env = {}) => {
   const environment = env.environment;
   const isProduction = environment === 'production';
 
-  const prodPlugins = [];
-  if (isProduction) {
-    // Production optimization
-    prodPlugins.push(
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: 'vendor.[hash].js',
-        minChunks: Infinity,
-      })
-    );
-
-    prodPlugins.push(
-      new webpack.optimize.AggressiveMergingPlugin());
-  }
-
   /* eslint-disable no-console */
   console.log(`Running webpack in ${environment} mode on ${platform ? 'browser': 'server'}`);
   /* eslint-enable */
@@ -33,13 +18,15 @@ module.exports = (env = {}) => {
     context: resolve(__dirname, 'src'),
     devtool: 'inline-source-map',
     entry: {
-      app: [
-        './styles/app.scss',
-        'react-hot-loader/patch',
-        // 'webpack-dev-server/client?http://localhost:8080',
-        'webpack/hot/only-dev-server',
-        './index.js'
-      ],
+      app: isProduction
+        ? [ './styles/app.scss', './index.js' ]
+        : [
+            './styles/app.scss',
+            'react-hot-loader/patch',
+            // 'webpack-dev-server/client?http://localhost:8080',
+            'webpack/hot/only-dev-server',
+            './index.js'
+          ],
       vendor: [
         'react',
         'react-dom',
@@ -47,7 +34,7 @@ module.exports = (env = {}) => {
       ]
     },
     output: {
-      filename: isProduction ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+      filename: isProduction ? 'js/[name].[hash].js' : 'js/[name].js',
       path: resolve(__dirname, 'public'),
       publicPath: '/'
     },
@@ -134,7 +121,9 @@ module.exports = (env = {}) => {
     },
     plugins: [
       // enable HMR globally
-      new webpack.HotModuleReplacementPlugin(),
+      isProduction
+      ? () => {}
+      : new webpack.HotModuleReplacementPlugin(),
       new webpack.NamedModulesPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.DefinePlugin({
@@ -167,11 +156,23 @@ module.exports = (env = {}) => {
         template: resolve(__dirname, 'src', 'index.html')
       }),
 
+      // Production optimization
+      isProduction
+      ? new webpack.optimize.AggressiveMergingPlugin()
+      : () => {},
+
+      isProduction
+      ? new webpack.optimize.CommonsChunkPlugin({
+          name: 'vendor',
+          filename: 'vendor.[hash].js',
+          minChunks: Infinity,
+        })
+      : () => {},
+
       // new CopyWebpackPlugin([
       //    { from: 'src/assets/fonts', to: 'public/fonts' },
       //    { from: 'src/assets/img/', to: 'public/img' }
       // ])
-      ...prodPlugins
     ]
   };
 };
