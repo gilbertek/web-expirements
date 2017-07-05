@@ -43,9 +43,9 @@ class ClinicalMedicationApi {
   static fetchClinicalMedications(memberId) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // if (Math.random() > 0.1) {
-        //   reject('Simulation random failure');
-        // }
+        if (Math.random() > 0.1) {
+          reject('Simulation random failure');
+        }
         resolve(Object.assign({}, clinicalMeds, memberId));
       }, 1000);
     });

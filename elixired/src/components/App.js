@@ -4,7 +4,6 @@ import ClinicalMedicationForm from './ClinicalMedicationForm';
 import MedicationHistory from './MedicationHistory';
 import Prescription from './Prescription';
 import MedicationHistoryReview from './MedicationHistoryReview';
-import MedicationAutosuggest from './MedicationAutosuggest';
 
 class App extends Component {
   render() {
@@ -26,9 +25,6 @@ class App extends Component {
         <br />
         <br />
         <Prescription />
-        <br />
-        <br />
-        <MedicationAutosuggest />
       </div>
     );
   }

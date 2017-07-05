@@ -7,7 +7,11 @@ const DrugList = ({ drugs }) => {
     <div className='row'>
       {
         drugs.length !== 0
-        ? drugs.map((drug, index) => <Drug key={index} {...drug} />)
+        ? drugs
+          .map(
+            (drug, index) => <Drug key={index}
+                                {...drug} />
+            )
         : <p style={{ width: '100%' }}>No drugs to display.</p>
       }
     </div>
