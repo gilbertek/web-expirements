@@ -3465,7 +3465,7 @@ class MedicationHistoryApi {
   static fetchMedicationHistoryRecords(memberId) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.1) {
           reject('Simulation random failure');
         }
         resolve(Object.assign({}, medHistory[0], memberId));
