@@ -14,7 +14,7 @@ const styles = {
   },
   columnHalf: {
     clear:   'both',
-    width:   '50%',
+    width:   '33%',
     display: 'inline-block'
   }
 };
@@ -89,6 +89,7 @@ class MedicationHistoryListItem extends Component {
         </div>
         <div className='med-description-details'
           style={stateStyle}>
+          <div style={styles.columnHalf}>&nbsp;</div>
           <div style={styles.columnHalf}>
             <MedicationWrapper
               qty={med.getQuantity()}

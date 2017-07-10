@@ -75,7 +75,7 @@ class MedicationHistoryReviewContainer extends Component {
 }
 
 MedicationHistoryReviewContainer.propTypes = {
-  modalActive: PropTypes.bool.isRequired
+  modalActive: PropTypes.bool
 };
 
 export default MedicationHistoryReviewContainer;

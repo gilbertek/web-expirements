@@ -78,8 +78,7 @@ const MedicationHistoryList = (props) => {
             patient={patient}
             editMode={editMode}
             key={index}
-            onChange={onChange}
-          />)
+            onChange={onChange} />)
         : <div className='text'>
             <p>There is no medication history to display.</p>
           </div>
