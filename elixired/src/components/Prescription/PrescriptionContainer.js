@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SearchBox from '../Shared/SearchBox';
 import DrugList from './DrugList';
+import PrescriptionForm from './PrescriptionForm';
 import {
   fetchDrugs,
   fetchDrugsByName
@@ -46,6 +47,8 @@ class PrescriptionContainer extends Component {
         {
           searchResult.length !== 0 ? <DrugList drugs={searchResult} /> : ''
         }
+
+        <PrescriptionForm />
       </div>
     );
   }

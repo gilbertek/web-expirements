@@ -25,10 +25,17 @@ const escapeRegexCharacters = (str) =>
 const randomDelay = () =>
   300 + Math.random() * 1000;
 
+const parseText = (str) => {
+  const pattern = /(https?:\/\/[^\s]+)/ig;
+
+  return str.replace(pattern,"<a href='$1'>$1</a>");
+};
+
 export {
   parseShortDate,
   formatShortDate,
   titlelize,
   escapeRegexCharacters,
-  randomDelay
+  randomDelay,
+  parseText
 };
