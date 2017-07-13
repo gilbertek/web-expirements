@@ -46,6 +46,7 @@ const ToggleableComponent = (WrappedComponent) => {
 
       return (
         <WrappedComponent {...this.props}
+          {...this.state}
           style={stateStyle}
           onClick={this.toggle} />
       );
@@ -56,12 +57,15 @@ const ToggleableComponent = (WrappedComponent) => {
 const RenalDoseAdjustments = (props) => {
   return (
     <div className='wrapper'>
-
-      <h3>
-        <a onClick={props.onClick}>
+      <h3 className='section-header'
+        onClick={props.onClick}>
           Renal Dose Information
-        </a>
+        <div className={`toggle toggle-${props.toggled}`}
+          onClick={props.onClick}>
+          <span>&nbsp;</span>
+        </div>
       </h3>
+
       <div style={props.style}>
         <ContentBox content={props.content} />
       </div>
@@ -72,7 +76,8 @@ const RenalDoseAdjustments = (props) => {
   RenalDoseAdjustments.propTypes = {
   content: PropTypes.string.isRequired,
   style:   PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  toggled: PropTypes.bool
 };
 
 const LiverDoseAdjustments = ({ content, status = false }) => {

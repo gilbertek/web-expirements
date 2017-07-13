@@ -65,8 +65,10 @@ class PrescriptionForm extends Component {
             </label>
           </fieldset>
 
-          <div>
-            <a href='#'>Reset</a>
+          <div className='form-field'>
+            <a href='#'
+              className='form-field--right'>
+              Reset</a>
           </div>
         </div>
 
@@ -81,6 +83,7 @@ class PrescriptionForm extends Component {
               placeholder='Lisinopril' />
           </div>
 
+          <div>&nbsp;</div>
           <div className='stacked-field'>
             <label htmlFor='dosageField'>&nbsp;</label>
             <select className='dosage-field'
