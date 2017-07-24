@@ -4,6 +4,8 @@ import ClinicalMedicationForm from './ClinicalMedicationForm';
 import MedicationHistory from './MedicationHistory';
 import Prescription from './Prescription';
 import MedicationHistoryReview from './MedicationHistoryReview';
+import Formulary from './Formulary'
+
 
 class App extends Component {
   render() {
@@ -24,7 +26,10 @@ class App extends Component {
         {/* <MedicationHistoryReview {...editprops} /> */}
         <br />
         <br />
-        <Prescription />
+        {/* <Prescription /> */}
+
+        <br />
+        <Formulary />
       </div>
     );
   }

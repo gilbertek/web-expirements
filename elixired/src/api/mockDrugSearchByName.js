@@ -202,3 +202,16 @@ const result = {
     "brand_generic": "brand"
   }
 };
+
+class DrugSearchApi {
+  static fetchDrugsByName(query) {
+    console.log(query)
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(Object.assign({}, result));
+      }, 10);
+    });
+  }
+}
+
+export default DrugSearchApi;
