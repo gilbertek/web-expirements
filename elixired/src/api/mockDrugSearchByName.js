@@ -204,7 +204,7 @@ const result = {
 };
 
 class DrugSearchApi {
-  static fetchDrugsByName(query) {
+  static fetchDrugByName(query) {
     console.log(query)
     return new Promise((resolve) => {
       setTimeout(() => {

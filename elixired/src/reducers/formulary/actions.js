@@ -10,18 +10,22 @@ import {
   SWITCH_FORMULARY_PGM_ERROR
 } from './constants';
 
-import DrugsApi from '../../api/';
+import DrugSearchApi from '../../api/DrugSearchApi';
+
+export const fetchFormularyRequest = () => ({
+    type: FETCH_FORMULARY_REQUEST
+});
 
 export const fetchFormularyError = (error) => ({
     type:    FETCH_FORMULARY_ERROR,
     message: error.message || 'Something went wrong'
 });
 
-export const fetchDrugsByName = (query) => {
+export const fetchDrugByName = (query) => {
   return (dispatch) => {
     dispatch(fetchFormularyRequest());
 
-    return DrugsApi.fetchDrugsByName(query)
+    return DrugSearchApi.fetchDrugByName(query)
       .then(
         response => dispatch(fetchDrugsByNameSuccess(response)),
         error => dispatch(fetchDrugsByNameError(error))
