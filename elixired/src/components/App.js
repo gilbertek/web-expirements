@@ -29,7 +29,7 @@ class App extends Component {
         {/* <Prescription /> */}
 
         <br />
-        <Formulary />
+        <Formulary drugName={`crestor`} />
       </div>
     );
   }

@@ -6,7 +6,7 @@ import {
 const DEFAULT_STATE = {
   medication_history_records: [],
   fetched:                    false,
-  isFetching:                 false,
+  isfetching:                 false,
   message:                    ''
 };
 

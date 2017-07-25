@@ -10,28 +10,32 @@ import {
   SWITCH_FORMULARY_PGM_ERROR
 } from './constants';
 
-import DrugSearchApi from '../../api/DrugSearchApi';
+import DrugSearchApi from '../../api/mockDrugSearchByName';
 
 export const fetchFormularyRequest = () => ({
-    type: FETCH_FORMULARY_REQUEST
+  type: FETCH_FORMULARY_REQUEST
 });
 
 export const fetchFormularyError = (error) => ({
-    type:    FETCH_FORMULARY_ERROR,
-    message: error.message || 'Something went wrong'
+  type:    FETCH_FORMULARY_ERROR,
+  message: error.message || 'Something went wrong'
 });
 
-export const fetchDrugByName = (query) => {
+export const fetchFormularyDrugSuccess = (response) => ({
+  type: FETCH_FORMULARY_SUCCESS,
+  response
+});
+
+export const fetchFormularyDrug = (query) => {
   return (dispatch) => {
     dispatch(fetchFormularyRequest());
 
     return DrugSearchApi.fetchDrugByName(query)
       .then(
-        response => dispatch(fetchDrugsByNameSuccess(response)),
-        error => dispatch(fetchDrugsByNameError(error))
+        response => dispatch(fetchFormularyDrugSuccess(response)),
+        error => dispatch(fetchFormularyError(error))
       )
       .catch(error => { throw new Error(error); });
   };
 };
-
 

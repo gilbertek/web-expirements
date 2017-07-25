@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ToggleableComponent from '../Shared/ToggleableComponent'
 import { parseText } from '../../lib/Utils';
 
 const styles = {
@@ -24,36 +25,6 @@ ContentBox.propTypes = {
   content: PropTypes.string.isRequired
 };
 
-const ToggleableComponent = (WrappedComponent) => {
-  return class InnerComponemt extends React.Component {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        toggled: false
-      };
-      this.toggle = this.toggle.bind(this);
-    }
-
-    toggle() {
-      this.setState({
-        toggled: !this.state.toggled
-      });
-    }
-
-    render() {
-      const stateStyle = this.state.toggled ? styles.active : styles.inactive;
-
-      return (
-        <WrappedComponent {...this.props}
-          {...this.state}
-          style={stateStyle}
-          onClick={this.toggle} />
-      );
-    }
-  };
-};
-
 const RenalDoseAdjustments = (props) => {
   return (
     <div className='wrapper'>
@@ -73,7 +44,7 @@ const RenalDoseAdjustments = (props) => {
   );
 };
 
-  RenalDoseAdjustments.propTypes = {
+RenalDoseAdjustments.propTypes = {
   content: PropTypes.string.isRequired,
   style:   PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
@@ -227,7 +198,8 @@ Dosage.propTypes = {
   doseAdjustments: PropTypes.string,
   precautions:     PropTypes.string,
   dialysis:        PropTypes.string,
-  otherComments:   PropTypes.string
+  otherComments:   PropTypes.string,
+  content:         PropTypes.string
 };
 
 export default Dosage;

@@ -9,9 +9,13 @@ import App from './components/App';
 import store from './store';
 import '../public/css/app.css';
 
+import { fetchFormularyDrug } from './reducers/formulary/actions';
+
 syncHistoryWithStore(createBrowserHistory(), store);
 
 const root = document.getElementById('app-container');
+
+// store.dispatch(fetchFormularyDrug('crestor'));
 
 const render = (Component) => {
   ReactDOM.render(
