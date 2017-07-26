@@ -4,7 +4,7 @@ import ToggleableComponent from '../Shared/ToggleableComponent';
 import FormularyStatusComponent from './FormularyStatusComponent';
 import PayerPlanComponent from './PayerPlanComponent';
 import CopayComponent from './CopayComponent';
-import * as Payer from '../../lib/Payer'
+import * as Payer from '../../lib/Payer';
 
 class PayerComponent extends Component {
   constructor(props) {

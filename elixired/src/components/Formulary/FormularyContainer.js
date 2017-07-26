@@ -6,8 +6,9 @@ import ToggleableComponent from '../Shared/ToggleableComponent';
 import FormularyStatusComponent from './FormularyStatusComponent';
 import PayerPlanComponent from './PayerPlanComponent';
 import CopayComponent from './CopayComponent';
+import CoverageComponent from './CoverageComponent';
+import AlternateMedicationList from './AlternateMedicationList';
 import * as Payer from '../../lib/Payer';
-
 import {
   fetchFormularyDrug
 } from '../../reducers/formulary/actions';
@@ -66,22 +67,23 @@ class FormularyContainer extends Component {
       const WrappedPayerPlan = ToggleableComponent(PayerPlanComponent);
       const WrappedCopay = ToggleableComponent(CopayComponent);
       const WrappedCoverage = ToggleableComponent(CoverageComponent);
+      const WrappedAltMeds = ToggleableComponent(AlternateMedicationList);
 
       return (
         <div className='wrapper'>
           <FormularyResponseHeaderComponent
             plan_name={plan.getPbmName()} />
-
           <WrappedFormularyStatus
             statusText={payer.formulary_status_text}
             toggled />
-
           <WrappedPayerPlan plan={plan}
             toggled />
-
           <WrappedCopay plan={plan}
             toggled />
           <WrappedCoverage plan={plan}
+            toggled />
+          <WrappedAltMeds
+            altMeds={payer.displayable_alternatives}
             toggled />
         </div>
       );

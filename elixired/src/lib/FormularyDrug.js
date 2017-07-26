@@ -2,6 +2,10 @@ import ProductRoute from './ProductRoute';
 import ProductStrength from './ProductStrength';
 import DoseForm from './DoseForm';
 
+import {
+  titlelize
+} from './Utils';
+
 class DrugCategory {
   constructor(arg = {}) {
     Object.assign(this, {
@@ -41,6 +45,38 @@ class GenericDrug {
       route_code:            arg.route_code,
       route_name:            arg.route_name,
     });
+  }
+
+  getName() {
+    return titlelize(this.drug_name);
+  }
+
+  getStrength() {
+    return this.drug_strength;
+  }
+
+  getDoseForm() {
+    return titlelize(this.dose_form);
+  }
+
+  getRoute() {
+    return titlelize(this.route_name);
+  }
+
+  getBrandType() {
+    return titlelize(this.gbo);
+  }
+
+  getPrescriptionType() {
+    return titlelize(this.otc_status);
+  }
+
+  getCopayAmount() {
+    return 0;
+  }
+
+  getFormularyStatus() {
+    return 'Yes';
   }
 }
 

@@ -2,9 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AlternateMedication from './AlternateMedication';
 
-const AlternateMedicationList = ({ altMeds }) => (
+const AlternateMedicationList = ({ altMeds, style, toggled, onClick }) => (
   <div className='wrapper'>
-    <table className='table'>
+    <h3 className='section-header'
+      onClick={onClick}>
+      Coverage Information
+      <div className={`toggle toggle-${toggled}`}
+        onClick={onClick}>
+        <span>&nbsp;</span>
+      </div>
+    </h3>
+
+    <table className='table' style={style}>
       <thead>
         <tr>
           <th>Name</th>
@@ -37,7 +46,10 @@ const AlternateMedicationList = ({ altMeds }) => (
 );
 
 AlternateMedicationList.propTypes = {
-  altMeds: PropTypes.array.isRequired
+  altMeds: PropTypes.array.isRequired,
+  style:   PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  toggled: PropTypes.bool
 };
 
 export default AlternateMedicationList;
