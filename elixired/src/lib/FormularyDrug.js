@@ -1,12 +1,6 @@
-class DoseForm {
-  constructor(arg = {}) {
-    Object.assign(this, {
-      dose_form_abbr:        arg.dose_form_abbr,
-      dose_form_code:        arg.dose_form_code,
-      dose_form_description: arg.dose_form_description
-    });
-  }
-}
+import ProductRoute from './ProductRoute';
+import ProductStrength from './ProductStrength';
+import DoseForm from './DoseForm';
 
 class DrugCategory {
   constructor(arg = {}) {
@@ -101,25 +95,6 @@ class NDC {
   }
 }
 
-class ProductRoute {
-  constructor(arg = {}) {
-    Object.assign(this, {
-      route_abbr:        arg.route_abbr,
-      route_code:        arg.route_code,
-      route_description: arg.route_description
-    });
-  }
-}
-
-class ProductStrength {
-  constructor(arg = {}) {
-    Object.assign(this, {
-      product_strength_code:        arg.product_strength_code,
-      product_strength_description: arg.product_strength_description
-    });
-  }
-}
-
 class FormularyDrug {
   constructor(data = {}) {
     Object.assign(this, {
@@ -143,4 +118,12 @@ class FormularyDrug {
   }
 }
 
-export default FormularyDrug;
+export {
+  FormularyDrug,
+  NDC,
+  MMDC,
+  DrugCategory,
+  Drug,
+  GenericDrug,
+  MultumDrug
+};

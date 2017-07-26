@@ -1,3 +1,7 @@
+import {
+  titlelize
+} from './Utils';
+
 class Account {
   constructor(args = {}) {
     Object.assign(this, {
@@ -30,6 +34,33 @@ class Plan {
       formulary: new Formulary(args.formulary)
     });
   }
+
+  getPbmName() {
+    return this.account.pbm_name;
+  }
+
+  getPbmId() {
+    return this.account.pbm_id;
+  }
+
+  getPlanId() {
+    return this.account.plan_number;
+  }
+
+  getPlanName() {
+    return this.account.plan_name;
+  }
+  getMemberId() {
+    return this.account.member_id;
+  }
+
+  getGroupName() {
+    return this.account.group_name;
+  }
+
+  getGroupId() {
+    return this.account.group_id;
+  }
 }
 
 class Payer {
@@ -46,4 +77,9 @@ class Payer {
   }
 }
 
-export default Payer;
+export {
+  Plan,
+  Payer,
+  Account,
+  Formulary,
+};

@@ -16,8 +16,9 @@ const ToggleableComponent = (WrappedComponent) => {
       super(props);
 
       this.state = {
-        toggled: false
+        toggled: this.props.toggled || false
       };
+
       this.toggle = this.toggle.bind(this);
     }
 
@@ -40,8 +41,11 @@ const ToggleableComponent = (WrappedComponent) => {
   };
 };
 
+ToggleableComponent.defaultProps = {
+  toggled: false
+};
+
 ToggleableComponent.propTypes = {
-  children: PropTypes.node,
   toggled:  PropTypes.bool.isRequired
 };
 
