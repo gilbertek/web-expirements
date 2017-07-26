@@ -11,7 +11,7 @@ class DoseForm {
 class DrugCategory {
   constructor(arg = {}) {
     Object.assign(this, {
-      category_name: arg.category_name,
+      category_name:      arg.category_name,
       multum_category_id: arg.multum_category_id
     });
   }
@@ -20,9 +20,9 @@ class DrugCategory {
 class Drug {
   constructor(arg = {}) {
     Object.assign(this, {
-      drug_name: arg.drug_name,
+      drug_name:       arg.drug_name,
       drug_synonym_id: arg.drug_synonym_id,
-      is_obsolete: arg.is_obsolete
+      is_obsolete:     arg.is_obsolete
     });
   }
 }
@@ -66,10 +66,58 @@ class MMDC {
 }
 
 class MultumDrug {
-  constructor(arg) {
-    // init
+  constructor(arg = {}) {
+    Object.assign(this, {
+      drug_id:                     arg.drug_id,
+      drug_synonym_id:             arg.drug_synonym_id,
+      empirically:                 arg.empirically,
+      half_life:                   arg.half_life,
+      is_single_ingredient:        arg.is_single_ingredient,
+      max_therapeutic_duplication: arg.max_therapeutic_duplication,
+      pregnancy_abbr:              arg.pregnancy_abbr
+    });
   }
+}
 
+class NDC {
+  constructor(arg = {}) {
+    Object.assign(this, {
+      brand_code:              arg.brand_code,
+      gbo:                     arg.gbo,
+      inner_package_desc:      arg.inner_package_desc,
+      inner_package_desc_code: arg.inner_package_desc_code,
+      inner_package_size:      arg.inner_package_size,
+      main_multum_drug_code:   arg.main_multum_drug_code,
+      ndc_code:                arg.ndc_code,
+      ndc_formatted:           arg.ndc_formatted,
+      obsolete_date:           arg.obsolete_date,
+      orange_book_id:          arg.orange_book_id,
+      otc_status:              arg.otc_status,
+      outer_package_size:      arg.outer_package_size,
+      repackaged:              arg.repackaged,
+      source_id:               arg.source_id,
+      unit_dose_code:          arg.unit_dose_code
+    });
+  }
+}
+
+class ProductRoute {
+  constructor(arg = {}) {
+    Object.assign(this, {
+      route_abbr:        arg.route_abbr,
+      route_code:        arg.route_code,
+      route_description: arg.route_description
+    });
+  }
+}
+
+class ProductStrength {
+  constructor(arg = {}) {
+    Object.assign(this, {
+      product_strength_code:        arg.product_strength_code,
+      product_strength_description: arg.product_strength_description
+    });
+  }
 }
 
 class FormularyDrug {
