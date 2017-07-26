@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ToggleableComponent from '../Shared/ToggleableComponent';
 import FormularyStatusComponent from './FormularyStatusComponent';
 import PayerPlanComponent from './PayerPlanComponent';
+import CopayComponent from './CopayComponent';
 import * as Payer from '../../lib/Payer'
 
 class PayerComponent extends Component {
@@ -16,6 +17,7 @@ class PayerComponent extends Component {
     const plan = new Payer.Plan(payer.plan);
     const WrappedFormularyStatus = ToggleableComponent(FormularyStatusComponent);
     const WrappedPayerPlan = ToggleableComponent(PayerPlanComponent);
+    const WrappedCopay = ToggleableComponent(CopayComponent);
 
     return (
       <div className='wrapper'>
@@ -28,18 +30,13 @@ class PayerComponent extends Component {
 
         <WrappedPayerPlan plan={plan}
           toggled />
+
+        <WrappedCopay plan={plan}
+          toggled />
       </div>
     );
   }
 }
-
-const CopayComponent = (plan) => (
-
-);
-
-CopayComponent.propTypes = {
-
-};
 
 const FormularyResponseHeaderComponent = ({ plan_name }) => (
   <h3>Formulary Response for {plan_name}</h3>
