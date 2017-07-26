@@ -12,7 +12,6 @@ class PayerComponent extends Component {
   }
 
   render() {
-    console.log('PAYERCOMPONENT::PROPS::', this.props.payer);
     const { payer } = this.props;
     const plan = new Payer.Plan(payer.plan);
     const WrappedFormularyStatus = ToggleableComponent(FormularyStatusComponent);
@@ -37,6 +36,10 @@ class PayerComponent extends Component {
     );
   }
 }
+
+PayerComponent.propTypes = {
+  payer: PropTypes.object.isRequired
+};
 
 const FormularyResponseHeaderComponent = ({ plan_name }) => (
   <h3>Formulary Response for {plan_name}</h3>

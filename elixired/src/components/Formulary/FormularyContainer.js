@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FetchApiError from '../Shared/FetchApiError';
-import DrugFormComponent from './DrugFormComponent';
-import PayerListComponent from './PayerListComponent';
+import ToggleableComponent from '../Shared/ToggleableComponent';
+import FormularyStatusComponent from './FormularyStatusComponent';
+import PayerPlanComponent from './PayerPlanComponent';
+import CopayComponent from './CopayComponent';
+import * as Payer from '../../lib/Payer';
 
 import {
   fetchFormularyDrug
@@ -35,11 +38,12 @@ class FormularyContainer extends Component {
   }
 
   render() {
-    console.log('PROPS::', this.props);
-
     const { isLoading, fetched, formulary, errorMessage } = this.props;
+    const { payers, drug } = formulary;
 
-    console.log('FORMULARY::', formulary);
+    // console.log('PAYERS' ,payers);
+    // console.log('DRUG', drug);
+
 
     if (isLoading) {
       return (
@@ -55,17 +59,36 @@ class FormularyContainer extends Component {
       );
     }
 
+    if (fetched) {
+      const payer = payers[0];
+      const plan = new Payer.Plan(payer.plan);
+      const WrappedFormularyStatus = ToggleableComponent(FormularyStatusComponent);
+      const WrappedPayerPlan = ToggleableComponent(PayerPlanComponent);
+      const WrappedCopay = ToggleableComponent(CopayComponent);
+      const WrappedCoverage = ToggleableComponent(CoverageComponent);
+
+      return (
+        <div className='wrapper'>
+          <FormularyResponseHeaderComponent
+            plan_name={plan.getPbmName()} />
+
+          <WrappedFormularyStatus
+            statusText={payer.formulary_status_text}
+            toggled />
+
+          <WrappedPayerPlan plan={plan}
+            toggled />
+
+          <WrappedCopay plan={plan}
+            toggled />
+          <WrappedCoverage plan={plan}
+            toggled />
+        </div>
+      );
+    }
+
     return (
-      <div className='wrapper'>
-        {
-          fetched &&
-          <DrugFormComponent drug={formulary.drug} />
-        }
-        {
-          fetched &&
-          <PayerListComponent payers={formulary.payers} />
-        }
-      </div>
+      <div className='wrapper' />
     );
   }
 }
@@ -111,3 +134,12 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(FormularyContainer);
+
+
+const FormularyResponseHeaderComponent = ({ plan_name }) => (
+  <h3>Formulary Response for {plan_name}</h3>
+);
+
+FormularyResponseHeaderComponent.propTypes = {
+  plan_name: PropTypes.string.isRequired
+};

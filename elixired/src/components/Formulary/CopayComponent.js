@@ -5,7 +5,7 @@ const CopayComponent = ({ plan, toggled, style, onClick }) => (
   <div className='wrapper'>
     <h3 className='section-header'
       onClick={onClick}>
-      Payer Plan: {plan.getPbmName()}
+      Copay Information
       <div className={`toggle toggle-${toggled}`}
         onClick={onClick}>
         <span>&nbsp;</span>
@@ -26,13 +26,12 @@ const CopayComponent = ({ plan, toggled, style, onClick }) => (
         </thead>
         <tbody>
           <tr>
-            <td>{plan.getMemberId()}</td>
-            <td>{plan.getPlanName()}</td>
-            <td>{plan.getPlanId()}</td>
-            <td>{plan.getGroupName()}</td>
-            <td>{plan.getGroupId()}</td>
-            <td>{plan.getPbmName()}</td>
-            <td>{plan.getPbmId()}</td>
+            <td>Mail Order</td>
+            <td>$15-$45</td>
+            <td>Copay Tier 3 (of 3)</td>
+            <td>$5-$20</td>
+            <td>$5 - Unlimited</td>
+            <td>90 Days</td>
           </tr>
         </tbody>
       </table>
