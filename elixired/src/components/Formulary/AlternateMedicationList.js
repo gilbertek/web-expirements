@@ -13,7 +13,8 @@ const AlternateMedicationList = ({ altMeds, style, toggled, onClick }) => (
       </div>
     </h3>
 
-    <table className='table' style={style}>
+    <table className='table'
+      style={style}>
       <thead>
         <tr>
           <th>Name</th>

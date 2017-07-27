@@ -45,13 +45,6 @@ class FormularyContainer extends Component {
     // console.log('PAYERS' ,payers);
     // console.log('DRUG', drug);
 
-
-    if (isLoading) {
-      return (
-        <p>Loading....</p>
-      );
-    }
-
     if (errorMessage) {
       return (
         <div className='wrapper'>
@@ -87,11 +80,11 @@ class FormularyContainer extends Component {
             toggled />
         </div>
       );
+    } else {
+      return (
+        <p>Loading....</p>
+      );
     }
-
-    return (
-      <div className='wrapper' />
-    );
   }
 }
 
