@@ -1,0 +1,30 @@
+{
+  "name": "react-rxjs",
+  "version": "1.0.0",
+  "description": "Demo rxjs",
+  "main": "index.js",
+  "author": "Gilbert Sewovoe-Ekoue",
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-logger": "^1.1.0",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-observable": "^0.14.1",
+    "rxjs": "^5.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "eslint": "4.3.0",
+    "eslint-config-prettier": "2.3.0",
+    "eslint-plugin-prettier": "2.1.2",
+    "prettier": "1.5.3",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
+  }
+}
