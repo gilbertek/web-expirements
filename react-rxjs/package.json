@@ -5,6 +5,24 @@
   "main": "index.js",
   "author": "Gilbert Sewovoe-Ekoue",
   "license": "MIT",
+  "scripts": {
+    "start": "npm-run-all --parallel dev lint:watch test:watch",
+    "dev": "webpack-dev-server -d --env.platform=browser --env.environment=development --progress --color --open",
+    "precommit": "lint-staged",
+    "prettier": "prettier --write ./src/**/*.js ./src/js/**/*.js",
+    "lint": "eslint . && yarn run prettier",
+    "lint:watch": "node_modules/eslint-watch/bin/esw -w src test webpack.config.*",
+    "lint:fix": "yarn run lint -- --fix",
+    "test": "mocha",
+    "test:watch": "yarn test -- --watch",
+    "build": "webpack -p --env.environment=production --env.platform=browser --progress"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

@@ -1,11 +1,14 @@
+import logger from 'redux-logger';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
-import logger from 'redux-logger';
+import createBrowserHistory from 'history/createBrowserHistory';
+import { routerMiddleware } from 'react-router-redux';
 
 import reducers from '../reducers';
 import epics from '../reducers/epics';
 
 const epicMiddleware = createEpicMiddleware(epics);
+const middleware = [epicMiddleware, routerMiddleware];
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -19,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 export default createStore(
   reducers,
   composeEnhancers(
-    applyMiddleware(epicMiddleware)
+    applyMiddleware(...middleware)
   )
 );
 
