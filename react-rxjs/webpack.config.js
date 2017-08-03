@@ -10,18 +10,13 @@ module.exports = (env = {}) => {
   const isProduction = environment === 'production';
 
   /* eslint-disable no-console */
-  console.log(`Running webpack in ${environment} mode on ${platform ? 'browser': 'server'}`);
+  console.log(`Running webpack in ${environment} mode on ${platform ? 'browser' : 'server'}`);
   /* eslint-enable */
 
   return {
     context: resolve(__dirname, 'src'),
     devtool: 'inline-source-map',
-    entry: [
-      'react-hot-loader/patch',
-      // 'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server',
-      './index.js'
-    ],
+    entry: ['react-hot-loader/patch', 'webpack/hot/only-dev-server', './index.js'],
     output: {
       filename: 'bundle.js',
       path: resolve(__dirname, 'src'),
@@ -31,7 +26,7 @@ module.exports = (env = {}) => {
       rules: [
         {
           test: /\.jsx?$/,
-          use: [ 'babel-loader' ],
+          use: ['babel-loader'],
           exclude: /node_modules/
         },
         {
@@ -41,16 +36,8 @@ module.exports = (env = {}) => {
             use: [
               { loader: 'css-loader' },
               {
-                loader: 'postcss-loader',
-                options: {
-                  plugins: () => ([
-                    autoprefixer({
-                      browsers: ['last 2 versions'],
-                      compress: true
-                    })
-                  ])
-                }
-              },
+                loader: 'postcss-loader'
+              }
             ]
           })
         },
@@ -79,21 +66,18 @@ module.exports = (env = {}) => {
           ]
         },
         {
-          test:   /\.(ttf|otf|eot|svg|woff)$/,
+          test: /\.(ttf|otf|eot|svg|woff)$/,
           loader: 'url-loader',
-          options:  {
+          options: {
             limit: 10000,
             name: '[name].[ext]',
             mimetype: 'application/x-font-woff'
           }
         }
-      ],
+      ]
     },
     resolve: {
-      modules: [
-        resolve(),
-        'node_modules'
-      ]
+      modules: [resolve(), 'node_modules']
     },
     devServer: {
       hot: true,
@@ -114,27 +98,15 @@ module.exports = (env = {}) => {
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.DefinePlugin({
         ENVIRONMENT: JSON.stringify(environment),
-        PLATFORM:    JSON.stringify(platform)
+        PLATFORM: JSON.stringify(platform)
       }),
       new HtmlWebpackPlugin({
         template: resolve(__dirname, 'src', 'index.html')
       }),
-      new webpack.LoaderOptionsPlugin({
-        minimize: false,
-        debug: true,
-        noInfo: true, // set to false to see a list of every file being bundled.
-        options: {
-          sassLoader: {
-            includePaths: [resolve(__dirname, 'src', 'scss')]
-          },
-          context: '/',
-          postcss: () => [autoprefixer],
-        }
-      }),
       new ExtractTextPlugin('css/app.css'),
       new webpack.optimize.UglifyJsPlugin({
-        compress: isProduction,
-      }),
+        compress: isProduction
+      })
     ]
-  }
-}
+  };
+};

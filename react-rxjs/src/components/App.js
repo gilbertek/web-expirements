@@ -1,10 +1,8 @@
-import React, { Component } from 'React';
+import React, { Component } from "React";
 
 class App extends Component {
   render() {
-    return (
-      <p>Hello Rxjs</p>
-    );
+    return <p>Hello Rxjs</p>;
   }
 }
 
