@@ -14,22 +14,20 @@ class App extends Component {
 
     return (
       <div className='wrapper'>
-        <ClinicalMedication {...props} />
+        {/* <ClinicalMedication {...props} /> */}
         <br />
         <br />
-        {/* <ClinicalMedicationForm /> */}
+        <ClinicalMedicationForm />
         <br />
         <br />
         {/* <MedicationHistory {...props} /> */}
         <br />
         <br />
-        {/* <MedicationHistoryReview {...editprops} /> */}
         <br />
-        <br />
-        {/* <Prescription /> */}
+        {/*<Prescription /> */}
 
         <br />
-        <Formulary drugName={`crestor`} />
+        {/*<Formulary drugName={`crestor`} /> */}
       </div>
     );
   }

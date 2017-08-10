@@ -12,14 +12,25 @@ const styles = {
 
 const ToggleableComponent = (WrappedComponent) => {
   return class InnerComponemt extends React.Component {
+    static propTypes = {
+      toggled: PropTypes.bool
+    }
+
     constructor(props) {
       super(props);
 
       this.state = {
-        toggled: this.props.toggled || false
+        toggled: false
       };
 
       this.toggle = this.toggle.bind(this);
+    }
+
+    componentWillMount() {
+      const { toggled } = this.props;
+      this.setState({
+        toggled
+      });
     }
 
     toggle() {

@@ -12,7 +12,6 @@ const styles = {
   }
 };
 
-
 const ContentBox = (props) => {
   return (
     <p className='wrapper'>
