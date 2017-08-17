@@ -1,6 +1,7 @@
 import React from 'react';
 import expect from 'expect';
 import thunk from 'redux-thunk';
+import jasmine from 'jasmine';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { mount } from 'enzyme';
@@ -13,5 +14,13 @@ describe('<FormularyContainer /> Container', () => {
   const store = mockStore({ formulary: {} });
 
   const props = {};
+});
 
+describe('mapStateToProps', () => {
+  describe('Loads formulary data on render', () => {
+    it('should render formulary data', () => {
+      const dispatch = jasmine.createSpy('dispatch');
+      // const result = mapDispatchToProps(dispatch);
+    });
+  });
 });
