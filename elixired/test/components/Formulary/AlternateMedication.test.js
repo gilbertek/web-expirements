@@ -31,6 +31,5 @@ describe('<AlternateMedication /> Component', () => {
     expect(wrapper.text()).toMatch(medication.getName());
     expect(wrapper.length).toBe(1);
     expect(wrapper.find('tr').length).toBe(1);
-    console.log('wrapper', wrapper.props());
   });
 });

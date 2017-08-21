@@ -19,7 +19,7 @@ describe('<FormularyContainer /> Container', () => {
 describe('mapStateToProps', () => {
   describe('Loads formulary data on render', () => {
     it('should render formulary data', () => {
-      const dispatch = jasmine.createSpy('dispatch');
+      // const dispatch = jasmine.createSpy('dispatch');
       // const result = mapDispatchToProps(dispatch);
     });
   });

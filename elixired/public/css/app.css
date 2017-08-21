@@ -689,3 +689,22 @@ select.refills-route-field {
   transition: .25s ease;
 }
 
+
+
+
+/* Tabs */
+ul.tab__label {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tab__link {
+  display: inline-block;
+  padding: 12px;
+  margin-right: 6px;
+}
+
+.tab__link-anchor.active {
+  border-bottom: 2px solid #df3;
+}

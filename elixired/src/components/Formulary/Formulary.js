@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FetchApiError from '../Shared/FetchApiError';
-import ToggleableComponent from '../Shared/ToggleableComponent';
-import FormularyStatusComponent from './FormularyStatusComponent';
-import PayerPlanComponent from './PayerPlanComponent';
-import CopayComponent from './CopayComponent';
-import CoverageComponent from './CoverageComponent';
-import AlternateMedicationList from './AlternateMedicationList';
-import * as Payer from '../../lib/Payer';
+import Tabs from './tabs';
 
 const FormularyResponseHeaderComponent = ({ plan_name }) => (
   <h3>Formulary Response for {plan_name}</h3>
@@ -54,32 +48,11 @@ class Formulary extends Component {
       );
     }
 
-    if (fetched) {
-      const payer = payers[0];
-      const plan = new Payer.Plan(payer.plan);
-      const WrappedFormularyStatus = ToggleableComponent(FormularyStatusComponent);
-      const WrappedPayerPlan = ToggleableComponent(PayerPlanComponent);
-      const WrappedCopay = ToggleableComponent(CopayComponent);
-      const WrappedCoverage = ToggleableComponent(CoverageComponent);
-      const WrappedAltMeds = ToggleableComponent(AlternateMedicationList);
-
+    if (fetched && payers.length > 0) {
       return (
-        <div className='wrapper'>
-          <FormularyResponseHeaderComponent
-            plan_name={plan.getPbmName()} />
-          <WrappedFormularyStatus
-            statusText={payer.formulary_status_text}
-            toggled />
-          <WrappedPayerPlan plan={plan}
-            toggled />
-          <WrappedCopay plan={plan}
-            toggled />
-          <WrappedCoverage plan={plan}
-            toggled />
-          <WrappedAltMeds
-            altMeds={payer.displayable_alternatives}
-            toggled />
-        </div>
+        <Tabs
+        tabList={payers}
+        activeTabIndex={0} />
       );
     } else {
       return (
