@@ -9,23 +9,30 @@ import CoverageComponent from './CoverageComponent';
 import AlternateMedicationList from './AlternateMedicationList';
 import * as Payer from '../../lib/Payer';
 
-const FormularyResponseHeaderComponent = ({ plan_name }) => (
-  <h3>Formulary Response for {plan_name}</h3>
-);
+const FormularyResponseHeaderComponent = ({ plan_name }) =>
+  <h3>
+    Formulary Response for {plan_name}
+  </h3>;
 
 FormularyResponseHeaderComponent.propTypes = {
   plan_name: PropTypes.string.isRequired
 };
+
+const FormularyInstructionComponent = () => {
+  <p>Lorem</p>;
+};
+
+FormularyInstructionComponent.propTypes = {};
 
 class Formulary extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fetched:   false,
+      fetched: false,
       formulary: {},
       isLoading: false,
-      drugName:  ''
+      drugName: ''
     };
   }
 
@@ -48,7 +55,7 @@ class Formulary extends Component {
 
     if (errorMessage) {
       return (
-        <div className='wrapper'>
+        <div className="wrapper">
           <FetchApiError message={errorMessage} />
         </div>
       );
@@ -64,45 +71,35 @@ class Formulary extends Component {
       const WrappedAltMeds = ToggleableComponent(AlternateMedicationList);
 
       return (
-        <div className='wrapper'>
-          <FormularyResponseHeaderComponent
-            plan_name={plan.getPbmName()} />
-          <WrappedFormularyStatus
-            statusText={payer.formulary_status_text}
-            toggled />
-          <WrappedPayerPlan plan={plan}
-            toggled />
-          <WrappedCopay plan={plan}
-            toggled />
-          <WrappedCoverage plan={plan}
-            toggled />
-          <WrappedAltMeds
-            altMeds={payer.displayable_alternatives}
-            toggled />
+        <div className="wrapper">
+          <FormularyResponseHeaderComponent plan_name={plan.getPbmName()} />
+          <WrappedFormularyStatus statusText={payer.formulary_status_text} toggled />
+          <WrappedPayerPlan plan={plan} toggled />
+          <WrappedCopay plan={plan} toggled />
+          <WrappedCoverage plan={plan} toggled />
+          <WrappedAltMeds altMeds={payer.displayable_alternatives} toggled />
         </div>
       );
     } else {
-      return (
-        <p>Loading....</p>
-      );
+      return <p>Loading....</p>;
     }
   }
 }
 
 Formulary.defaultProps = {
-  drugName:     '',
-  isLoading:    false,
-  formulary:    {},
+  drugName: '',
+  isLoading: false,
+  formulary: {},
   errorMessage: ''
 };
 
 Formulary.propTypes = {
-  fetched:            PropTypes.bool,
-  children:           PropTypes.node,
+  fetched: PropTypes.bool,
+  children: PropTypes.node,
   fetchFormularyDrug: PropTypes.func,
-  isLoading:          PropTypes.bool.isRequired,
-  drugName:           PropTypes.string.isRequired,
-  formulary:          PropTypes.object.isRequired,
-  errorMessage:       PropTypes.string.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  drugName: PropTypes.string.isRequired,
+  formulary: PropTypes.object.isRequired,
+  errorMessage: PropTypes.string.isRequired
 };
 export default Formulary;
