@@ -15,13 +15,8 @@ class LoginForm extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(e) {
-    const target = e.target;
-    const name = target.name;
-
-    this.setState({
-      [name]: e.target.value
-    });
+  onChange(e, { name, value }) {
+    this.setState({ [name]: value });
   }
 
   onSubmit(e) {
@@ -33,9 +28,11 @@ class LoginForm extends Component {
     this.setState({ email: '', password: '' });
   }
 
-  render() {
-    console.log(this.props);
+  handleCancel = (event) => {
+    event.preventDefault();
+  }
 
+  render() {
     const { isLoginPending, isLoginSuccess, loginError } = this.props;
 
     console.log(isLoginPending);
