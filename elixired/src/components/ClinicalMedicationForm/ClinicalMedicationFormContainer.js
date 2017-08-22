@@ -51,6 +51,25 @@ class ClinicalMedicationFormContainer extends Component {
     this.props.saveMedication(this.state.medication);
   }
 
+
+  // Better naming
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const { medication } = this.state;
+    const { handleSubmit } = this.props;
+
+    handleSubmit(medication);
+    this.setState({ medication: {} })
+  }
+
+  handleChange = (event, { name, value }) => {
+    const { medication } = this.state;
+    this.setState({
+      medication: { ...medication, [name]: value }
+    });
+  }
+
   handleOnChange(event) {
     event.preventDefault();
     const field = event.target.name;
