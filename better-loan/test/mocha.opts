@@ -1,0 +1,8 @@
+--compilers js:babel-core/register,jsx:babel-core/register
+--require test/setup.js
+
+--reporter progress
+--ui bdd
+
+--recursive
+--full-trace
