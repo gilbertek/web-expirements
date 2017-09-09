@@ -1,0 +1,66 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "babel",
+    "import",
+    "promise",
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jquery": true,
+    "mocha": true,
+    "node": true
+  },
+  "rules": {
+    "key-spacing"          : "off",
+    "jsx-quotes"           : [2, "prefer-single"],
+    "max-len"              : [2, 120, 2],
+    "object-curly-spacing" : [2, "always"],
+    "complexity"           : ["warn", 10],
+    "no-var"               : "error",
+    "comma-dangle"         : [ "error", "only-multiline" ],
+    "keyword-spacing"      : "warn",
+    "linebreak-style"      : [ "warn", "unix" ],
+    "semi"                 : [ "warn", "always" ],
+    "prefer-arrow-callback": "warn",
+    "prefer-const"         : "error",
+    "prefer-spread"        : "error",
+    "prefer-template"      : "error",
+    "no-this-before-super" : "error",
+    "no-duplicate-imports" : "error",
+    "no-case-declarations" : "error",
+    "no-fallthrough"       : "error",
+    "object-shorthand"     : "error",
+    "arrow-spacing"        : [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "constructor-super"    : "error",
+    "space-before-function-paren": [ "warn", "never" ],
+    "import/extensions"    : "error",
+    "react/jsx-boolean-value": "warn",
+    "react/jsx-curly-spacing": "warn",
+    "react/jsx-key": "warn",
+    "react/jsx-max-props-per-line": "warn",
+    "react/no-did-mount-set-state": "warn",
+    "react/no-did-update-set-state": "warn",
+    "react/no-string-refs": "warn",
+    "react/self-closing-comp": "warn"
+  }
+}
