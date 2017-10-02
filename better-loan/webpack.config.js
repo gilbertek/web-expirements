@@ -20,22 +20,9 @@ const scssLoader = () => ({
   use: ExtractTextPlugin.extract({
     fallback: 'style-loader',
     use: [
-      { loader: 'css-loader',
-        options: {
-          modules: true,
-          importLoaders: 2,
-          sourceMap: true
-        },
+      { loader: 'css-loader' },
       {
-        loader: 'postcss-loader',
-        options: {
-          plugins: () => [
-            autoprefixer({
-              browsers: ['last 2 versions'],
-              compress: true
-            })
-          ]
-        }
+        loader: 'postcss-loader'
       }
     ]
   })
@@ -89,44 +76,34 @@ const devServer = () => ({
   }
 });
 
-const plugins = (env = 'development') => [
-  // enable HMR globally
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin(),
-  new webpack.NoEmitOnErrorsPlugin(),
-  new HtmlWebpackPlugin({
-    template: resolve(__dirname, 'src', 'index.html')
-  }),
-  new ExtractTextPlugin('[name]-[hash].min.css'),
-  new webpack.LoaderOptionsPlugin({
-    minimize: true,
-    debug: false
-  }),
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(env),
-    ENVIRONMENT: JSON.stringify(env)
-  }),
-  new webpack.optimize.ModuleConcatenationPlugin(),
-   new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: ({ resource }) => (
-      resource !== undefined &&
-      resource.indexOf('node_modules') !== -1
-    ),
-  }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'manifest',
-    minChunks: Infinity,
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: env === 'production'
-  }),
-  new webpack.ProvidePlugin({
-    React: 'react',
-    ReactDOM: 'react-dom',
-    PropTypes: 'props-types'
-  })
-];
+const plugins = (env = 'development') =>
+  [
+    // enable HMR globally
+    env === 'development' ? new webpack.HotModuleReplacementPlugin() : null,
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      template: resolve(__dirname, 'src', 'index.html')
+    }),
+    new ExtractTextPlugin({ filename: '[name]-[hash].min.css' }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env),
+      ENVIRONMENT: JSON.stringify(env)
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: env === 'production'
+    }),
+    new webpack.ProvidePlugin({
+      React: 'react',
+      ReactDOM: 'react-dom',
+      PropTypes: 'props-types'
+    })
+  ].filter(p => p !== null);
 
 module.exports = (env = {}) => {
   // Variables set by npm scripts in package.json
@@ -140,14 +117,17 @@ module.exports = (env = {}) => {
 
   return {
     context: resolve(__dirname, 'src'),
-    devtool: env === 'production' ? 'source-map' : 'cheap-eval-source-map',
+    devtool: 'inline-source-map',
     entry: {
-      app: [
-        'react-hot-loader/patch',
-        'webpack-dev-server/client?http://localhost:8080',
-        'webpack/hot/only-dev-server',
-        './index.js'
-      ]
+      app: isProduction
+        ? './index.js'
+        : [
+            'react-hot-loader/patch',
+            'webpack-dev-server/client?http://localhost:8080',
+            'webpack/hot/only-dev-server',
+            './index.js'
+          ],
+      vendor: ['react', 'react-dom', 'prop-types', 'react-router-dom', 'redux', 'react-redux']
     },
     output: output(),
     target: platform,
