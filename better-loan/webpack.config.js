@@ -20,7 +20,12 @@ const scssLoader = () => ({
   use: ExtractTextPlugin.extract({
     fallback: 'style-loader',
     use: [
-      { loader: 'css-loader' },
+      { loader: 'css-loader',
+        options: {
+          modules: true,
+          importLoaders: 2,
+          sourceMap: true
+        },
       {
         loader: 'postcss-loader',
         options: {
@@ -102,6 +107,17 @@ const plugins = (env = 'development') => [
     ENVIRONMENT: JSON.stringify(env)
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
+   new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks: ({ resource }) => (
+      resource !== undefined &&
+      resource.indexOf('node_modules') !== -1
+    ),
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'manifest',
+    minChunks: Infinity,
+  }),
   new webpack.optimize.UglifyJsPlugin({
     compress: env === 'production'
   }),
@@ -124,7 +140,7 @@ module.exports = (env = {}) => {
 
   return {
     context: resolve(__dirname, 'src'),
-    devtool: 'inline-source-map',
+    devtool: env === 'production' ? 'source-map' : 'cheap-eval-source-map',
     entry: {
       app: [
         'react-hot-loader/patch',
