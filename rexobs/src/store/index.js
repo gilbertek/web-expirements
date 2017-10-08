@@ -1,10 +1,10 @@
-import logger from "redux-logger";
-import { createStore, applyMiddleware, compose } from "redux";
-import { createEpicMiddleware } from "redux-observable";
-import { routerMiddleware } from "react-router-redux";
+import logger from 'redux-logger';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { createEpicMiddleware } from 'redux-observable';
+import { routerMiddleware } from 'react-router-redux';
 
-import reducers from "../reducers";
-import epics from "../reducers/epics";
+import reducers from '../reducers';
+import epics from '../epics';
 
 const epicMiddleware = createEpicMiddleware(epics);
 const middleware = [epicMiddleware, routerMiddleware];
@@ -13,12 +13,9 @@ const middleware = [epicMiddleware, routerMiddleware];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 /* eslint-disable no-undef */
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   middleware.push(logger);
 }
 /* eslint-enable */
 
-export default createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(...middleware))
-);
+export default createStore(reducers, composeEnhancers(applyMiddleware(...middleware)));

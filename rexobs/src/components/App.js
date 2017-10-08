@@ -1,8 +1,13 @@
-import React, { Component } from "React";
+import React, { Component } from 'React';
+import Stories from './Stories';
 
 class App extends Component {
   render() {
-    return <p>Hello Rxjs</p>;
+    return (
+      <div className="App">
+        <Stories />
+      </div>
+    );
   }
 }
 
