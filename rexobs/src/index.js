@@ -1,6 +1,6 @@
 import React from 'React';
 import ReactDOM from 'react-dom';
-import { AppContainer } from "react-hot-loader";
+import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -12,7 +12,7 @@ syncHistoryWithStore(createBrowserHistory(), store);
 
 const root = document.getElementById('app-container');
 
-const render = (Component) => {
+const render = Component => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>

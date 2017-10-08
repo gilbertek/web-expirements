@@ -9,6 +9,7 @@
     "stage-0"
   ],
   "plugins": [
+    "transform-react-jsx-source",
     "react-hot-loader/babel"
     // Enables React code to work with HMR.
   ]
