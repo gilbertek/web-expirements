@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log('YES::Action>>', action);
+  console.log('YES::Action>>', action.type);
   console.log('YES::State>>', state);
   switch (action.type) {
     case LOAD_STORIES:

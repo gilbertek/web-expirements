@@ -1,0 +1,11 @@
+{
+  "name": "wrtc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gilbert F. Ekoue",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "socket.io": "^2.0.3"
+  }
+}

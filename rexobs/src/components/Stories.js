@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadStories, clearStories } from '../reducers/stories/actions';
+import {
+  LOAD_STORIES,
+  loadStories,
+  clearStories,
+} from '../reducers/stories/actions';
 
 const Story = ({ title }) => {
   return <p>{title}</p>;
