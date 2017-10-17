@@ -9,8 +9,6 @@ class PrescriptionModal extends Component {
     super(props);
 
     this.state = { modalOpen: false };
-    console.log('PrescriptionModal::STATE::', this.state);
-    console.log('PrescriptionModal::PROPS::', this.props);
   }
 
   render() {
