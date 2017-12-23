@@ -12,10 +12,6 @@ const ModalWrapper = (WrappedComponent, params) => {
       this.state = {
         ...params
       };
-
-      console.log('ModalWrapper::PROPS::', this.props);
-      console.log('ModalWrapper::STATE::', this.state);
-      console.log('ModalWrapper::Component::', WrappedComponent);
     }
 
     render() {
