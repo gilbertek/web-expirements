@@ -18,7 +18,7 @@ describe('GenericDrug', () => {
     repackaged: false,
     route_abbr: 'PO',
     route_code: 2426,
-    route_name: 'oral'
+    route_name: 'oral',
   };
 
   it('returns a GenericDrug Object', () => {

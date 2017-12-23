@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  LOAD_STORIES,
-  loadStories,
-  clearStories,
-} from '../reducers/stories/actions';
+import { loadStories, clearStories } from '../reducers/stories/actions';
 
 const Story = ({ title }) => {
   return <p>{title}</p>;
@@ -59,6 +55,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
+  console.log(dispatch(loadStories()));
+
   return {
     loadStories: () => dispatch(loadStories()),
     clearStories: () => dispatch(clearStories()),
