@@ -9,9 +9,6 @@ export const browserHistory = createBrowserHistory();
 const routeMiddleware = routerMiddleware(browserHistory);
 const middleware = [thunk, routeMiddleware];
 
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 /* eslint-disable no-undef */
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(logger);
@@ -20,7 +17,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default createStore(
   reducers,
-  composeEnhancers(
-    applyMiddleware(...middleware)
-  )
+  compose(
+    applyMiddleware(...middleware),
+    window.devToolsExtension ?
+      window.devToolsExtension() : f => f,
+  ),
 );

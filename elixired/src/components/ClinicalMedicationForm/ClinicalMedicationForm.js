@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import TextInput from '../Shared/TextInput';
 import SelectInput from '../Shared/SelectInput';
 
-const ClinicalMedicationForm = (props) => {
+const ClinicalMedicationForm = props => {
   const {
-  medication,
-  directionList,
-  statusList,
-  onSave,
-  onChange,
-  isSaving,
-  errors
-} = props;
+    medication,
+    directionList,
+    statusList,
+    onSave,
+    onChange,
+    isSaving,
+    errors,
+  } = props;
 
   return (
     <form className='course-form'>
@@ -23,14 +23,16 @@ const ClinicalMedicationForm = (props) => {
         label='Medication'
         onChange={onChange}
         value={medication.name}
-        error={errors.name}/>
+        error={errors.name}
+      />
 
       <TextInput
         name='dosage'
         label='Dosage'
         onChange={onChange}
         value={medication.dosage}
-        error={errors.dosage}/>
+        error={errors.dosage}
+      />
 
       <SelectInput
         name='direction'
@@ -39,7 +41,8 @@ const ClinicalMedicationForm = (props) => {
         defaultOption='Select one...'
         options={directionList}
         onChange={onChange}
-        error={errors.direction} />
+        error={errors.direction}
+      />
 
       <SelectInput
         name='status'
@@ -48,26 +51,28 @@ const ClinicalMedicationForm = (props) => {
         defaultOption='Select one...'
         options={statusList}
         onChange={onChange}
-        error={errors.status} />
+        error={errors.status}
+      />
 
       <input
         type='submit'
         disabled={isSaving}
         value={isSaving ? 'Saving' : 'Add Medication'}
         className='btn btn-primary'
-        onClick={onSave} />
+        onClick={onSave}
+      />
     </form>
   );
 };
 
 ClinicalMedicationForm.propTypes = {
-  medication:    PropTypes.object.isRequired,
+  medication: PropTypes.object.isRequired,
   directionList: PropTypes.array,
-  statusList:    PropTypes.array,
-  onSave:        PropTypes.func.isRequired,
-  onChange:      PropTypes.func.isRequired,
-  isSaving:      PropTypes.bool,
-  errors:        PropTypes.object
+  statusList: PropTypes.array,
+  onSave: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool,
+  errors: PropTypes.object,
 };
 
 export default ClinicalMedicationForm;
