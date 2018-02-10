@@ -4201,8 +4201,8 @@ ignore@^3.3.3, ignore@^3.3.5:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.7.tgz#612289bfb3c220e186a58118618d5be8c1bab021"
 
 image-webpack-loader@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/image-webpack-loader/-/image-webpack-loader-4.0.0.tgz#922be4eb07fc1ab804f292bbbcdc70053d9141b9"
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/image-webpack-loader/-/image-webpack-loader-4.1.0.tgz#57c32975925ede8a0854127f004f674977adea6e"
   dependencies:
     imagemin "^5.2.2"
     imagemin-gifsicle "^5.1.0"
