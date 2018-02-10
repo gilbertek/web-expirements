@@ -13,7 +13,7 @@ FormularyResponseHeaderComponent.propTypes = {
 };
 
 const FormularyInstructionComponent = () => {
-  <p>Lorem</p>;
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi eum atque illum iure velit voluptatem delectus nostrum! Veritatis temporibus, laborum recusandae placeat provident, molestiae inventore, architecto nostrum mollitia voluptatibus praesentium.</p>;
 };
 
 FormularyInstructionComponent.propTypes = {};
@@ -49,16 +49,19 @@ class Formulary extends Component {
 
     if (errorMessage) {
       return (
-        <div className="wrapper">
+        <div className='wrapper'>
           <FetchApiError message={errorMessage} />
         </div>
       );
     }
 
     if (fetched && payers.length > 0) {
-      return <Tabs tabList={payers} activeTabIndex={0} />;
+      return (
+        <Tabs tabList={payers}
+          activeTabIndex={0} />
+      );
     } else {
-      return <p>Loading....</p>;
+      return <p>Loading more....</p>;
     }
   }
 }

@@ -14,7 +14,7 @@ const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
         <input
           type='text'
           name={name}
-          className='form-control'
+          className='form-control warn'
           placeholder={placeholder}
           value={value}
           onChange={onChange} />

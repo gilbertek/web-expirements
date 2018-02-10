@@ -1,6 +1,6 @@
 {
   "presets": [
-    ["es2015"],
+    ["env"],
     // webpack understands the native import syntax, and uses it for tree shaking
 
     "react",
