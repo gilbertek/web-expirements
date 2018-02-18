@@ -2,6 +2,7 @@ import Header from '../components/header'
 import withMui from '../shared/MUI/withMUI'
 import 'isomorphic-fetch'
 import { Card, CardHeader, CardText } from 'material-ui/Card';
+import Link from 'next/link'
 
 const Index = ({ posts }) =>
   <div>
@@ -12,7 +13,13 @@ const Index = ({ posts }) =>
         <Card key={x.id}>
           <CardHeader title={x.title} />
           <CardText>
-            <RaisedButton label="Click to view post!" fullWidth={true} />
+            <RaisedButton fullWidth={true} primary={true}>
+            <Link href={`/post?id=${x.id}`} as={`/blog/${x.id}`}>
+              <a>
+                Click to view post
+              </a>
+            </Link>
+          </RaisedButton>
           </CardText>
         </Card>
       )
@@ -21,7 +28,7 @@ const Index = ({ posts }) =>
 
 
   Index.getInitialProps = async () => {
-  const response = await fetch(`${process.env.BLOGGER_URL}?key=${process.env.BLOGGER_API_KEY}`)
+  const response = await fetch(`${process.env.BLOGGER_URL}?key=${process.env.API_KEY}`)
   const data = await response.json();
 
   return { posts: data.items }
