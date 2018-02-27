@@ -5,8 +5,8 @@ const luke = {
   homePlanet: 'Tatooine',
   birthYear: -19,
   friends: ['2', '3'],
-  appearsIn: [4, 5, 6, 7, 8]
-}
+  appearsIn: [4, 5, 6, 7, 8],
+};
 
 const han = {
   id: '3',
@@ -15,8 +15,8 @@ const han = {
   homePlanet: 'Corellia',
   birthYear: -30,
   friends: ['1', '2'],
-  appearsIn: [4, 5, 6, 7]
-}
+  appearsIn: [4, 5, 6, 7],
+};
 
 const vader = {
   id: '4',
@@ -25,8 +25,8 @@ const vader = {
   homePlanet: 'Tatooine',
   birthYear: -41,
   friends: ['5'],
-  appearsIn: [1, 2, 3, 4, 5, 6]
-}
+  appearsIn: [1, 2, 3, 4, 5, 6],
+};
 
 const emperor = {
   id: '5',
@@ -35,8 +35,8 @@ const emperor = {
   homePlanet: 'Naboo',
   birthYear: -82,
   friends: ['4'],
-  appearsIn: [1, 2, 3, 4, 5, 6]
-}
+  appearsIn: [1, 2, 3, 4, 5, 6],
+};
 
 const r2d2 = {
   id: '2',
@@ -44,34 +44,34 @@ const r2d2 = {
   name: 'R2-D2',
   manufacturer: 'Industrial Automaton',
   appearsIn: [1, 2, 3, 4, 5, 6, 7, 8],
-  friends: []
-}
+  friends: [],
+};
 
 const humans = {
-  '1': luke,
-  '3': han,
-  '4': vader,
-  '5': emperor
+  1: luke,
+  3: han,
+  4: vader,
+  5: emperor,
+};
+
+const droids = { 2: r2d2 };
+
+function getCharacter(id) {
+  return humans[id] || droids[id];
 }
 
-const droids = {'2': r2d2}
-
-function getCharacter (id) {
-  return humans[id] || droids[id]
-}
-
-function getFriends (character, appearsIn = null) {
-  let friends = character.friends.map((id) => getCharacter(id))
+function getFriends(character, appearsIn = null) {
+  let friends = character.friends.map(id => getCharacter(id));
 
   if (appearsIn !== null) {
-    friends = friends.filter((friend) => friend.appearsIn.includes(appearsIn))
+    friends = friends.filter(friend => friend.appearsIn.includes(appearsIn));
   }
 
-  return friends
+  return friends;
 }
 
-function createHuman (human) {
-  console.log('CreateHuman', human)
+function createHuman(human) {
+  console.log('CreateHuman', human);
 
   humans[human.id] = {
     id: human.id,
@@ -80,14 +80,14 @@ function createHuman (human) {
     homePlanet: 'Unknown',
     birthYear: human.birthYear,
     friends: [],
-    appearsIn: []
-  }
+    appearsIn: [],
+  };
 
-  return humans[human.id]
+  return humans[human.id];
 }
 
 module.exports = {
   getCharacter,
   getFriends,
-  createHuman
-}
+  createHuman,
+};

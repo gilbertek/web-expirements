@@ -106,6 +106,62 @@ const CharacterInterface = new GraphQLInterfaceType({
   },
 });
 
+const HumanType = new GraphQLObjectType({
+  name: 'HumanType',
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    birthYear: { type: DateType },
+  }),
+});
+
+
+const DroidType = new GraphQLObjectType({
+  name: 'DroidType',
+  description: 'A droid character in the Start Wars universe.',
+  interfaces: [CharacterInterface],
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    manufacturer: { type: GraphQLString },
+    appearsIn: { type: new GraphQLList(EpisodeEnum) },
+    friends: {
+      type: new GraphQLList(CharacterInterface),
+      args: { appearsIn: { type: EpisodeEnum } },
+      resolve: (droid, { appearsIn }) => Data.getFriends(droid, appearsIn),
+    },
+  }),
+});
+
+const query = new GraphQLObjectType({
+  name: 'Query',
+  fields: () => ({
+    character: {
+      type: CharacterInterface,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID),
+          description: 'ID of the character',
+        },
+      },
+      resolve: (root, { id }) => Data.getCharacter(id),
+    },
+  }),
+});
+
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: () => ({
+    createHuman: {
+      description: 'Create a new human character',
+      type: HumanType,
+      args: {
+        human: { type: HumanType },
+      },
+      resolve: (root, { human }) => Data.createHuman(human),
+    },
+  }),
+});
 
 module.exports = new GraphQLSchema({
   query,
