@@ -1,15 +1,16 @@
-const express = require('express')
-const expressGraphQl = require('express-graphql')
-const schema = require('./server/schema')
-const server = express()
-const port = parseInt(process.env.PORT, 10) || 3000
+const express = require('express');
+const expressGraphQL = require('express-graphql');
+const schema = require('./server/schema');
 
-server.use('/', expressGraphQl({
+const server = express();
+const port = parseInt(process.env.PORT, 10) || 3000;
+
+server.use('/', expressGraphQL({
   schema,
-  graphql: true
-}))
+  graphiql: true,
+}));
 
 server.listen(port, (err) => {
-  if (err) throw err
-  console.log(`> Ready on http://localhost:${port}`)
-})
+  if (err) throw err;
+  console.log(`> Ready on http://localhost:${port}`);
+});

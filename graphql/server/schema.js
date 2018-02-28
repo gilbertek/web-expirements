@@ -106,12 +106,30 @@ const CharacterInterface = new GraphQLInterfaceType({
   },
 });
 
-const HumanType = new GraphQLObjectType({
-  name: 'HumanType',
+const HumanInputType = new GraphQLInputObjectType({
+  name: 'HumanInput',
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     birthYear: { type: DateType },
+  }),
+});
+
+const HumanType = new GraphQLObjectType({
+  name: 'Human',
+  description: 'A human character in the Star Wars universe.',
+  interfaces: [CharacterInterface],
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    birthYear: { type: DateType },
+    homePlanet: { type: GraphQLString },
+    appearsIn: { type: new GraphQLList(EpisodeEnum) },
+    friends: {
+      type: new GraphQLList(CharacterInterface),
+      args: { appearsIn: { type: EpisodeEnum } },
+      resolve: (human, { appearsIn }) => Data.getFriends(human, appearsIn),
+    },
   }),
 });
 
@@ -156,7 +174,7 @@ const mutation = new GraphQLObjectType({
       description: 'Create a new human character',
       type: HumanType,
       args: {
-        human: { type: HumanType },
+        human: { type: HumanInputType },
       },
       resolve: (root, { human }) => Data.createHuman(human),
     },
