@@ -1,0 +1,8 @@
+{
+  "name": "react-mapd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gilbert Sewovoe-Ekoue",
+  "license": "MIT",
+  "private": true
+}
