@@ -1,4 +1,3 @@
-import path from 'path';
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -9,10 +8,12 @@ dotenv.config();
 
 const app = express();
 
+/*
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, 'access.log'),
   { flag: 'a' }
 );
+*/
 
 const schema = require('./server/schema');
 
