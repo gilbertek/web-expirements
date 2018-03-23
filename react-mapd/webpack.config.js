@@ -3,12 +3,12 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = (_env, argv) => {
+module.exports = (env = {}, argv) => {
   return {
     context: resolve(__dirname, 'src'),
     devtool: argv.mode === 'production' ? '' : 'inline-cheap-source-map',
     entry: {
-      app: ['react-hot-loader/patch', 'index.js'],
+      app: ['react-hot-loader/patch', '../client/index.js'],
       vendor: [
         'react',
         'react-dom',
@@ -34,12 +34,7 @@ module.exports = (_env, argv) => {
           test: /\.s?css$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: [
-              { loader: 'css-loader' },
-              {
-                loader: 'postcss-loader',
-              },
-            ],
+            use: [{ loader: 'css-loader' }],
           }),
         },
         {
@@ -65,6 +60,13 @@ module.exports = (_env, argv) => {
       modules: ['node_modules', resolve(__dirname, 'src')],
       extensions: ['.js', '.jsx', '.json', '.css'],
     },
+    optimization: {
+      namedModules: true,
+      splitChunks: {
+        name: 'vendor',
+        minChunks: 2,
+      },
+    },
     devServer: {
       contentBase: './dist',
       hot: true,
@@ -74,6 +76,7 @@ module.exports = (_env, argv) => {
       new HtmlWebpackPlugin({
         template: '../client/index.html',
       }),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
   };
 };
