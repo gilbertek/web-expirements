@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env = {}, argv) => {
+  const platform = env.platform || 'browser'; // browser by default
+  const environment = env.environment;
+
   return {
     context: resolve(__dirname, 'src'),
     devtool: argv.mode === 'production' ? '' : 'inline-cheap-source-map',
