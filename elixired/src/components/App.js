@@ -1,7 +1,14 @@
-import React, { Component } from 'React';
-import ClinicalMedicationForm from './ClinicalMedicationForm';
-import Formulary from './Formulary';
+import React, { Component } from 'react';
+import FilteredList from './User/FilteredList';
+// import ClinicalMedicationForm from './ClinicalMedicationForm';
+// import Formulary from './Formulary';
 
+const starWarsChars = [
+  { name: 'Luke', side: 'light' },
+  { name: 'Darth Vader', side: 'dark' },
+  { name: 'Obi-wan Kenobi', side: 'light' },
+  { name: 'Palpatine', side: 'dark' },
+];
 
 class App extends Component {
   render() {
@@ -9,21 +16,8 @@ class App extends Component {
     // const editprops = { memberId: 1, editMode: true };
 
     return (
-      <div className='wrapper'>
-        {/* <ClinicalMedication {...props} /> */}
-        <br />
-        <br />
-        <ClinicalMedicationForm />
-        <br />
-        <br />
-        {/* <MedicationHistory {...props} /> */}
-        <br />
-        <br />
-        <br />
-        {/*<Prescription /> */}
-
-        <br />
-        <Formulary drugName={`crestor`} />
+      <div className="wrapper">
+        <FilteredList defaultState="dark" list={starWarsChars} />
       </div>
     );
   }

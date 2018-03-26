@@ -1,6 +1,6 @@
-import React from 'React';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from "react-hot-loader";
+import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -9,7 +9,7 @@ import App from './components/App';
 import store from './store';
 import '../public/css/app.css';
 
-import { fetchFormularyDrug } from './reducers/formulary/actions';
+// import { fetchFormularyDrug } from './reducers/formulary/actions';
 
 syncHistoryWithStore(createBrowserHistory(), store);
 
@@ -17,7 +17,7 @@ const root = document.getElementById('app-container');
 
 // store.dispatch(fetchFormularyDrug('crestor'));
 
-const render = (Component) => {
+const render = Component => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>

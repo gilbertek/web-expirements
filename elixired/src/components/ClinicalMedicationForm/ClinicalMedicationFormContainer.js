@@ -18,15 +18,15 @@ class ClinicalMedicationFormContainer extends Component {
     super(props);
 
     this.state = {
-      active:        false,
-      medication:    Object.assign({}, this.props.medication),
+      active: false,
+      medication: Object.assign({}, this.props.medication),
       directionList: [],
-      statusList:    [],
-      errors:        {},
+      statusList: [],
+      errors: {},
     };
 
-    this.toggle         = this.toggle.bind(this);
-    this.handleOnSave   = this.handleOnSave.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.handleOnSave = this.handleOnSave.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
@@ -36,8 +36,7 @@ class ClinicalMedicationFormContainer extends Component {
     });
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   componentWillReceiveProps(nextProps) {
     if (this.props.medication.id != nextProps.medication.id) {
@@ -51,24 +50,23 @@ class ClinicalMedicationFormContainer extends Component {
     this.props.saveMedication(this.state.medication);
   }
 
-
   // Better naming
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const { medication } = this.state;
     const { handleSubmit } = this.props;
 
     handleSubmit(medication);
-    this.setState({ medication: {} })
-  }
+    this.setState({ medication: {} });
+  };
 
   handleChange = (event, { name, value }) => {
     const { medication } = this.state;
     this.setState({
-      medication: { ...medication, [name]: value }
+      medication: { ...medication, [name]: value },
     });
-  }
+  };
 
   handleOnChange(event) {
     event.preventDefault();
@@ -82,12 +80,14 @@ class ClinicalMedicationFormContainer extends Component {
     const { isSaving, statusList, directionList } = this.props;
 
     return (
-      <section className='row'>
+      <section className="row">
         <a onClick={this.toggle}>
           <h4>Add additional Patient Identified Medications</h4>
         </a>
-        <p>Instruction to provider: Enter additional medications
-          patient has indicated they are taking</p>
+        <p>
+          Instruction to provider: Enter additional medications patient has
+          indicated they are taking
+        </p>
 
         <div style={stateStyle}>
           <ClinicalMedicationForm
@@ -97,7 +97,8 @@ class ClinicalMedicationFormContainer extends Component {
             onSave={this.handleOnSave}
             onChange={this.handleOnChange}
             isSaving={isSaving}
-            errors={this.state.errors} />
+            errors={this.state.errors}
+          />
         </div>
       </section>
     );
@@ -105,53 +106,49 @@ class ClinicalMedicationFormContainer extends Component {
 }
 
 ClinicalMedicationFormContainer.defaultProps = {
-  errors:        {},
-  statusList:    [
-    { value: 1, text: 'Current' },
-    { value: 2, text: 'Past' }
-  ],
+  errors: {},
+  statusList: [{ value: 1, text: 'Current' }, { value: 2, text: 'Past' }],
   directionList: [
     { value: 1, text: 'Daily' },
     { value: 2, text: 'Twice a day' },
     { value: 3, text: 'Three times a day' },
     { value: 4, text: 'Four times a day' },
     { value: 5, text: 'At Bed time' },
-    { value: 6, text: 'As needed' }
+    { value: 6, text: 'As needed' },
   ],
-  medication:    {},
-  isSaving:      false,
+  medication: {},
+  isSaving: false,
 };
 
 ClinicalMedicationFormContainer.propTypes = {
-  medication:         PropTypes.object,
-  directionList:      PropTypes.array.isRequired,
-  statusList:         PropTypes.array.isRequired,
-  isSaving:           PropTypes.bool.isRequired,
-  errors:             PropTypes.object,
-  saveMedication:     PropTypes.func,
+  medication: PropTypes.object,
+  directionList: PropTypes.array.isRequired,
+  statusList: PropTypes.array.isRequired,
+  isSaving: PropTypes.bool.isRequired,
+  errors: PropTypes.object,
+  saveMedication: PropTypes.func,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const medication = {
-    name:      '',
-    dosage:    '',
+    name: '',
+    dosage: '',
     direction: '',
-    status:    'Current'
+    status: 'Current',
   };
 
   return {
     medication,
-    state
+    state,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    saveMedication: (medication) => dispatch(Promise.resolve(medication))
+    saveMedication: medication => dispatch(Promise.resolve(medication)),
   };
 };
 
-export default (connect)(
-  mapStateToProps,
-  mapDispatchToProps
-)(ClinicalMedicationFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ClinicalMedicationFormContainer
+);
