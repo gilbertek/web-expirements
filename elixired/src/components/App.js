@@ -17,7 +17,7 @@ class App extends Component {
 
     return (
       <div className="wrapper">
-        <FilteredList defaultState="dark" list={starWarsChars} />
+        <FilteredList side="dark" list={starWarsChars} />
       </div>
     );
   }

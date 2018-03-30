@@ -1,42 +1,51 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const Button = ({ title, onClickHandlerFunc }) => (
+  <button onClick={onClickHandlerFunc}>{title}</button>
+);
 
-class FilteredList extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-  };
+Button.propTypes = {
+  title: PropTypes.string.isRequired,
+  onClickHandlerFunc: PropTypes.func.isRequired,
+};
 
-  constructor(props) {
-    super(props);
-
-    this.state = { value: this.props.defaultState };
-  }
-
-  updateState = value => {
-    this.setState({ value });
-  };
-
-  render() {
-    const otherSide = this.state.value === 'dark' ? 'light' : 'dark';
-    const transformedProps = this.props.list.filter(
-      char => char.side === this.state.value
-    );
-
-    return (
-      <div>
-        <button onClick={() => this.updateState(otherSide)}>Switch</button>
-
-        {transformedProps.map(char => (
-          <div key={char.name}>
-            <div>Character: {char.name}</div>
-            <div>Side: {char.side}</div>
-          </div>
-        ))}
+const renderDisplayList = ({ list }) => (
+  <div>
+    {list.map(char => (
+      <div key={char.name}>
+        <div>Character: {char.name}</div>
+        <div>Side: {char.side}</div>
       </div>
-    );
-  }
-}
+    ))}
+  </div>
+);
+
+renderDisplayList.propTypes = {
+  list: PropTypes.array,
+};
+
+// 1st Implementation
+// const withFilteredProps = BaseComponent => ({ list, side }) => {
+//   const filteredList = list.filter(char => char.side === side);
+//   return <BaseComponent list={filteredList} />;
+// };
+// const FilteredList = withFilteredProps(renderDisplayList);
+
+// 2nd Itiration
+const withTransformProps = transformFunc => {
+  const ConfiguredComponent = BaseComponent => {
+    return baseProps => {
+      const transformedProps = transformFunc(baseProps);
+      return <BaseComponent {...transformedProps} />;
+    };
+  };
+
+  return ConfiguredComponent;
+};
+
+const FilteredList = withTransformProps(({ list, side }) => ({
+  list: list.filter(char => char.side === side),
+}))(renderDisplayList);
 
 export default FilteredList;
