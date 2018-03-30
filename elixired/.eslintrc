@@ -54,7 +54,6 @@
     "constructor-super"    : "error",
     "space-before-function-paren": [ "warn", "never" ],
     "import/extensions"    : "error",
-    "react/display-name": [2, { "ignoreTranspilerName": true }],
     "react/jsx-boolean-value": "warn",
     "react/jsx-curly-spacing": "warn",
     "react/jsx-key": "warn",
