@@ -13,7 +13,7 @@ module.exports = (env = {}, options) => {
     devtool: sourceMap,
     target: platform,
     entry: {
-      app: ['index.js'],
+      app: [resolve(__dirname, 'src/index.js')],
       vendor: ['react', 'react-dom', 'prop-types'],
     },
     output: {
@@ -58,7 +58,7 @@ module.exports = (env = {}, options) => {
     },
     resolve: {
       modules: ['node_modules', resolve(__dirname, 'src')],
-      extensions: ['.js', '.jsx', '.json', '.css'],
+      extensions: ['.js', '.jsx', '.json', '.css', 'scss'],
     },
     optimization: {
       namedModules: true,
@@ -74,6 +74,9 @@ module.exports = (env = {}, options) => {
       new HtmlWebpackPlugin({
         template: resolve(__dirname, 'src', 'index.html'),
       }),
+      new webpack.NamedModulesPlugin(),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new ExtractTextPlugin('styles.css'),
     ],
     devServer: {
       contentBase: './dist',

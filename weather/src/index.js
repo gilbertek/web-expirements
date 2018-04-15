@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 // Most styling will be done using styled-components but here we'll
 // define some global reset and base styles using straight up CSS
-// import './index.css';
+import './styles/main.scss';
 
 ReactDOM.render(<App />, document.getElementById('app-container'));
 
