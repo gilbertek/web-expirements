@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CounterList component matches the snapshot 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+  >
+    Add Counter
+  </button>
+  <ul>
+    <li>
+      <div>
+        <p>
+          Current count: 
+          0
+        </p>
+        <button
+          className="increment"
+          onClick={[Function]}
+        >
+          +++
+        </button>
+        <button
+          className="decrement"
+          onClick={[Function]}
+        >
+          ---
+        </button>
+      </div>
+    </li>
+    <li>
+      <div>
+        <p>
+          Current count: 
+          0
+        </p>
+        <button
+          className="increment"
+          onClick={[Function]}
+        >
+          +++
+        </button>
+        <button
+          className="decrement"
+          onClick={[Function]}
+        >
+          ---
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+`;
