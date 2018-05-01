@@ -4,97 +4,66 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = (env = {}) => {
-  // Variables set by npm scripts in package.json
-  const platform = env.platform; // 'browser' by default
-  const environment = env.environment;
-  const isProduction = environment === 'production';
-
-  /* eslint-disable no-console */
-  console.log(`Running webpack in ${environment} mode on ${platform ? 'browser': 'server'}`);
-  /* eslint-enable */
+module.exports = (env = {}, options) => {
+  const platform = env.platform || 'web'; // web by default
+  const isProduction = options.mode === 'production';
+  const sourceMap = isProduction ? '' : 'inline-cheap-source-map';
 
   return {
     context: resolve(__dirname, 'src'),
-    devtool: 'inline-source-map',
-    entry: [
-      'react-hot-loader/patch',
-      // 'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server',
-      './index.js'
-    ],
+    target: platform,
+    devtool: sourceMap,
+    entry: ['./index.js'],
     output: {
-      filename: 'bundle.js',
       path: resolve(__dirname, 'src'),
-      publicPath: '/'
+      publicPath: '/',
+      filename: isProduction
+        ? '[name][chunkhash].bundle.js'
+        : '[name].bundle.js'
     },
     module: {
       rules: [
         {
           test: /\.jsx?$/,
-          use: [ 'babel-loader' ],
+          use: ['babel-loader'],
           exclude: /node_modules/
         },
         {
           test: /\.s?css$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: [
-              { loader: 'css-loader' },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  plugins: () => ([
-                    autoprefixer({
-                      browsers: ['last 2 versions'],
-                      compress: true
-                    })
-                  ])
-                }
-              },
-            ]
+            use: [{ loader: 'css-loader' }]
           })
         },
         {
-          test: /\.(jpe?g|png|gif|svg)$/i,
+          test: /\.html$/,
           use: [
-            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
             {
-              loader: 'image-webpack-loader',
-              options: {
-                mozjpeg: {
-                  progressive: true
-                },
-                gifsicle: {
-                  interlaced: false
-                },
-                optipng: {
-                  optimizationLevel: 4
-                },
-                pngquant: {
-                  quality: '75-90',
-                  speed: 4
-                }
-              }
+              loader: 'html-loader',
+              options: { minimize: true }
             }
           ]
         },
         {
-          test:   /\.(ttf|otf|eot|svg|woff)$/,
-          loader: 'url-loader',
-          options:  {
-            limit: 10000,
-            name: '[name].[ext]',
-            mimetype: 'application/x-font-woff'
-          }
+          test: /\.(png|svg|jpg|gif)$/,
+          use: ['file-loader']
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: ['file-loader']
         }
-      ],
+      ]
     },
     resolve: {
-      modules: [
-        resolve(),
-        'node_modules'
-      ]
+      modules: [resolve(), 'node_modules'],
+      extensions: ['.js', '.jsx', '.json', '.css', 'scss']
+    },
+    optimization: {
+      namedModules: true,
+      splitChunks: {
+        name: 'vendor',
+        minChunks: 2
+      }
     },
     devServer: {
       hot: true,
@@ -103,45 +72,22 @@ module.exports = (env = {}) => {
       inline: true,
       publicPath: '/',
       contentBase: resolve(__dirname, 'src'),
-      disableHostCheck: true,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
+      disableHostCheck: true
     },
     plugins: [
       // enable HMR globally
-      new webpack.HotModuleReplacementPlugin(),
+      options.mode === 'development'
+        ? new webpack.HotModuleReplacementPlugin()
+        : () => {},
       new webpack.NamedModulesPlugin(),
-      new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.DefinePlugin({
-        ENVIRONMENT: JSON.stringify(environment),
-        PLATFORM:    JSON.stringify(platform)
-      }),
       new HtmlWebpackPlugin({
         template: resolve(__dirname, 'src', 'index.html')
       }),
-      new webpack.LoaderOptionsPlugin({
-        minimize: false,
-        debug: true,
-        noInfo: true, // set to false to see a list of every file being bundled.
-        options: {
-          sassLoader: {
-            includePaths: [resolve(__dirname, 'src', 'scss')]
-          },
-          context: '/',
-          postcss: () => [autoprefixer],
-        }
-      }),
       new ExtractTextPlugin('css/app.css'),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: isProduction,
-      }),
       new webpack.ProvidePlugin({
         React: 'react',
         ReactDOM: 'react-dom',
-        PropTypes: 'props-types',
-        Immutable: 'immutable',
-        I: 'immutable'
+        PropTypes: 'props-types'
       })
     ]
   };
