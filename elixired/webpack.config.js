@@ -1,8 +1,9 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = (env = {}, options) => {
   const platform = env.platform || 'web'; // web by default
@@ -32,7 +33,7 @@ module.exports = (env = {}, options) => {
           test: /\.s?css$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: [{ loader: 'css-loader' }]
+            use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }]
           })
         },
         {
@@ -43,6 +44,21 @@ module.exports = (env = {}, options) => {
               options: { minimize: true }
             }
           ]
+        },
+        {
+          test: /\.png$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                mimetype: 'image/png'
+              }
+            }
+          ]
+        },
+        {
+          test: /\.svg$/,
+          use: ['file-loader']
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
@@ -84,11 +100,15 @@ module.exports = (env = {}, options) => {
         template: resolve(__dirname, 'src', 'index.html')
       }),
       new ExtractTextPlugin('css/app.css'),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new webpack.ProvidePlugin({
         React: 'react',
         ReactDOM: 'react-dom',
         PropTypes: 'props-types'
-      })
+      }),
+      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+      new LodashModuleReplacementPlugin(),
+      isProduction ? new UglifyJSPlugin() : () => {}
     ]
   };
 };
