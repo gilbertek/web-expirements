@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = (env = {}, options) => {
   const platform = env.platform || 'web'; // web by default
@@ -14,9 +15,11 @@ module.exports = (env = {}, options) => {
     context: resolve(__dirname, 'src'),
     target: platform,
     devtool: sourceMap,
-    entry: ['./index.js'],
+    entry: {
+      app: './index.js'
+    },
     output: {
-      path: resolve(__dirname, 'src'),
+      path: resolve(__dirname, 'dist'),
       publicPath: '/',
       filename: isProduction
         ? '[name][chunkhash].bundle.js'
@@ -57,11 +60,7 @@ module.exports = (env = {}, options) => {
           ]
         },
         {
-          test: /\.svg$/,
-          use: ['file-loader']
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
+          test: /\.(svg|jpg|gif)$/,
           use: ['file-loader']
         },
         {
@@ -87,10 +86,11 @@ module.exports = (env = {}, options) => {
       historyApiFallback: true,
       inline: true,
       publicPath: '/',
-      contentBase: resolve(__dirname, 'src'),
+      contentBase: resolve(__dirname, 'dist'),
       disableHostCheck: true
     },
     plugins: [
+      new CleanWebpackPlugin(['dist']),
       // enable HMR globally
       options.mode === 'development'
         ? new webpack.HotModuleReplacementPlugin()
@@ -106,7 +106,7 @@ module.exports = (env = {}, options) => {
         ReactDOM: 'react-dom',
         PropTypes: 'props-types'
       }),
-      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+      new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
       new LodashModuleReplacementPlugin(),
       isProduction ? new UglifyJSPlugin() : () => {}
     ]
