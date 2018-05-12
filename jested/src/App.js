@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css';
 import Form from './Form';
+import TodoList from './TodoList';
 
 export default class App extends Component {
   state = {
@@ -36,6 +37,7 @@ export default class App extends Component {
           <h3 className={this.state.mainColor}>Everyone is welcome</h3>
         </header>
 
+        <TodoList />
         <Form />
 
         <p className='App-intro'>

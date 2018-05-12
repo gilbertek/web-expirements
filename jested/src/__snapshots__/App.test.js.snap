@@ -23,6 +23,7 @@ exports[`<App /> shallow rendering matches the snapshot 1`] = `
       Everyone is welcome
     </h3>
   </header>
+  <Connect(TodoList) />
   <Form />
   <p
     className="App-intro"
