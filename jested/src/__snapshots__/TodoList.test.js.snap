@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoList /> matches the snapshot 1`] = `
+<div
+  className="todos--container"
+>
+  <h1>
+    Todos
+  </h1>
+  <input
+    className="todos--addTodo"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+  <ul />
+  <button
+    className="todo--button"
+    onClick={[Function]}
+  >
+    Add Todo
+  </button>
+</div>
+`;
