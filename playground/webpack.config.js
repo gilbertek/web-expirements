@@ -2,101 +2,83 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-module.exports = (env = {}) => {
-  // Variables set by npm scripts in package.json
-  const platform = env.platform; // 'browser' by default
-  const environment = env.environment;
-  const isProduction = environment === 'production';
-
-  /* eslint-disable no-console */
-  console.log(`Running webpack in ${environment} mode on ${platform ? 'browser': 'server'}`);
-  /* eslint-enable */
+module.exports = (env = {}, options) => {
+  const platform = env.platform || 'web'; // web by default
+  const isProduction = options.mode === 'production';
+  const sourceMap = isProduction ? '' : 'inline-cheap-source-map';
 
   return {
     context: resolve(__dirname, 'src'),
-    devtool: 'inline-source-map',
+    target: platform,
+    devtool: sourceMap,
     entry: {
-      app: isProduction
-        ? [ './styles/app.scss', './index.js' ]
-        : [
-            './styles/app.scss',
-            'react-hot-loader/patch',
-            // 'webpack-dev-server/client?http://localhost:8080',
-            'webpack/hot/only-dev-server',
-            './index.js'
-          ],
-      vendor: [
-        'react',
-        'react-dom',
-        'react-router-dom'
-      ]
+      app: './index.js'
     },
     output: {
-      filename: isProduction ? 'js/[name].[hash].js' : 'js/[name].js',
-      path: resolve(__dirname, 'public'),
-      publicPath: '/'
-    },
-    resolve: {
-      extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
-      modules: [
-        'node_modules',
-        resolve(__dirname, 'src'),
-        resolve(),
-      ]
+      path: resolve(__dirname, 'dist'),
+      publicPath: '/',
+      filename: isProduction
+        ? '[name][chunkhash].bundle.js'
+        : '[name].bundle.js'
     },
     module: {
       rules: [
         {
           test: /\.jsx?$/,
-          use: [ 'babel-loader' ],
+          use: ['babel-loader'],
           exclude: /node_modules/
         },
         {
           test: /\.s?css$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: [
-              { loader: 'css-loader' },
-              { loader: 'postcss-loader' }
-            ]
+            use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }]
           })
         },
         {
-          test: /\.(jpe?g|png|gif|svg)$/i,
+          test: /\.html$/,
           use: [
-            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
             {
-              loader: 'image-webpack-loader',
+              loader: 'html-loader',
+              options: { minimize: true }
+            }
+          ]
+        },
+        {
+          test: /\.png$/,
+          use: [
+            {
+              loader: 'url-loader',
               options: {
-                mozjpeg: {
-                  progressive: true
-                },
-                gifsicle: {
-                  interlaced: false
-                },
-                optipng: {
-                  optimizationLevel: 4
-                },
-                pngquant: {
-                  quality: '75-90',
-                  speed: 4
-                }
+                mimetype: 'image/png'
               }
             }
           ]
         },
         {
-          test:   /\.(ttf|otf|eot|svg|woff)$/,
-          loader: 'url-loader',
-          options:  {
-            limit: 10000,
-            name: '[name].[ext]',
-            mimetype: 'application/x-font-woff'
-          }
+          test: /\.(svg|jpg|gif)$/,
+          use: ['file-loader']
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: ['file-loader']
         }
-      ],
+      ]
+    },
+    resolve: {
+      modules: [resolve(), 'node_modules'],
+      extensions: ['.js', '.jsx', '.json', '.css', 'scss']
+    },
+    optimization: {
+      namedModules: true,
+      splitChunks: {
+        name: 'vendor',
+        minChunks: 2
+      }
     },
     devServer: {
       hot: true,
@@ -104,75 +86,29 @@ module.exports = (env = {}) => {
       historyApiFallback: true,
       inline: true,
       publicPath: '/',
-      contentBase: resolve(__dirname, 'public'),
-      disableHostCheck: true,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    },
-    performance: {
-      hints: 'warning', // enum
-      maxAssetSize: 200000, // int (in bytes),
-      maxEntrypointSize: 400000, // int (in bytes)
-      assetFilter: (assetFilename) => {
-        // Function predicate that provides asset filenames
-        return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
-      }
+      contentBase: resolve(__dirname, 'dist'),
+      disableHostCheck: true
     },
     plugins: [
+      new CleanWebpackPlugin(['dist']),
       // enable HMR globally
-      isProduction
-      ? () => {}
-      : new webpack.HotModuleReplacementPlugin(),
+      options.mode === 'development'
+        ? new webpack.HotModuleReplacementPlugin()
+        : () => {},
       new webpack.NamedModulesPlugin(),
-      new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.DefinePlugin({
-        ENVIRONMENT: JSON.stringify(environment),
-        PLATFORM:    JSON.stringify(platform)
-      }),
-      new webpack.LoaderOptionsPlugin({
-        minimize: false,
-        debug: true,
-        noInfo: true, // set to false to see a list of every file being bundled.
-        options: {
-          sassLoader: {
-            includePaths: [resolve(__dirname, 'src', 'scss')]
-          },
-          context: '/',
-        }
-      }),
-      new ExtractTextPlugin({ filename: 'css/[name].css', allChunks: true }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: isProduction,
-      }),
-      new webpack.ProvidePlugin({
-        React: 'react',
-        ReactDOM: 'react-dom',
-        PropTypes: 'props-types',
-        Immutable: 'immutable',
-        I: 'immutable'
-      }),
       new HtmlWebpackPlugin({
         template: resolve(__dirname, 'src', 'index.html')
       }),
-
-      // Production optimization
-      isProduction
-      ? new webpack.optimize.AggressiveMergingPlugin()
-      : () => {},
-
-      isProduction
-      ? new webpack.optimize.CommonsChunkPlugin({
-          name: 'vendor',
-          filename: 'vendor.[hash].js',
-          minChunks: Infinity,
-        })
-      : () => {},
-
-      // new CopyWebpackPlugin([
-      //    { from: 'src/assets/fonts', to: 'public/fonts' },
-      //    { from: 'src/assets/img/', to: 'public/img' }
-      // ])
+      new ExtractTextPlugin('css/app.css'),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new webpack.ProvidePlugin({
+        React: 'react',
+        ReactDOM: 'react-dom',
+        PropTypes: 'props-types'
+      }),
+      new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
+      new LodashModuleReplacementPlugin(),
+      isProduction ? new UglifyJSPlugin() : () => {}
     ]
   };
 };
