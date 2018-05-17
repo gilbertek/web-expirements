@@ -39,6 +39,7 @@
     }
   },
   "dependencies": {
+    "bulma": "^0.7.1",
     "moment": "^2.18.1",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
@@ -50,7 +51,8 @@
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.4.1",
