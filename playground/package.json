@@ -39,6 +39,7 @@
     }
   },
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "bulma": "^0.7.1",
     "moment": "^2.18.1",
     "prop-types": "^15.6.1",
@@ -70,7 +71,7 @@
     "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.3",
+    "enzyme-to-json": "^3.3.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -82,7 +83,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.4.3",
+    "jest": "^22.4.4",
     "lodash-webpack-plugin": "^0.11.5",
     "nock": "^9.0.13",
     "node-sass": "^4.9.0",
