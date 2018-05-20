@@ -1,7 +1,6 @@
 {
   "extends": [
     "airbnb",
-    "prettier",
     "prettier/react"
   ],
   "plugins": [
@@ -11,7 +10,7 @@
     "prettier"
   ],
   "parserOptions": {
-    "ecmaVersion": 2016,
+    "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -19,17 +18,17 @@
   },
   "env": {
     "browser": true,
-    "node": true
+    "commonjs": true,
+    "node": true,
+    "es6": true
   },
   "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ]
+    "max-len": [1, {"code": 80}],
+    "react/jsx-filename-extension": [1, {"extensions": [".js"]}],
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    "arrow-parens": [2, "as-needed", { "requireForBlockBody": true }],
+    "import/no-extraneous-dependencies": [2, {
+      "devDependencies": ["test/**"]
+    }]
   }
 }
