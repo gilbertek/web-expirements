@@ -24,12 +24,19 @@ import {
   Cite,
   Deck,
   Heading,
+  Image,
+  Layout,
   ListItem,
   List,
   Quote,
   Slide,
-  Text,
-  Image
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderItem,
+  TableItem,
+  TableRow,
+  Text
 } from "spectacle";
 
 // Require CSS
@@ -116,7 +123,7 @@ export default class Presentation extends React.Component {
             Tools for state management
           </Heading>
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            Complexity (at first glance) for complex application
+            Complexity (at first glance) for <strike>complex</strike> application
           </Text>
           <List>
             <ListItem>
@@ -154,6 +161,62 @@ export default class Presentation extends React.Component {
               Testing
             </ListItem>
           </List>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="primary"
+          notes="Hard to find cities without any pizza"
+        >
+          <Heading size={4} caps textColor="secondary" bgColor="white" margin={10}>
+            Testing tools
+          </Heading>
+          <Layout>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderItem />
+                  <TableHeaderItem>Provider</TableHeaderItem>
+                  <TableHeaderItem>Medication Services UI</TableHeaderItem>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableItem>None</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>None</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>None</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>None</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>None</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>None</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>None</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                  <TableItem>Enzyme</TableItem>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Layout>
         </Slide>
 
         <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
