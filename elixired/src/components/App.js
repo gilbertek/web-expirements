@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FilteredList from './User/FilteredList';
 // import ClinicalMedicationForm from './ClinicalMedicationForm';
 // import Formulary from './Formulary';
+import SignupForm from './Signup';
 
 const starWarsChars = [
   { name: 'Luke', side: 'light' },
@@ -16,8 +17,9 @@ class App extends Component {
     // const editprops = { memberId: 1, editMode: true };
 
     return (
-      <div className="wrapper">
-        <FilteredList side="dark" list={starWarsChars} />
+      <div className='wrapper'>
+        {/* <FilteredList side="dark" list={starWarsChars} /> */}
+        <SignupForm />
       </div>
     );
   }
