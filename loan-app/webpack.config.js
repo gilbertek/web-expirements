@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env = {}, options) => {
@@ -36,8 +36,28 @@ module.exports = (env = {}, options) => {
           enforce: "pre",
           test: /\.js$/,
           loader: "source-map-loader"
+        },
+        {
+        test: /\.scss$/,
+        use: [
+          "style-loader", // creates style nodes from JS strings
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader" // compiles Sass to CSS
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|svg)$/,
+        loader: 'file-loader',
+        options: {
+            name: 'assets/[name].[ext]',
         }
+      }
       ]
-    }
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: "./index.html"
+      })
+    ]
   };
 };
