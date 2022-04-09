@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.10",
-    "moment": "^2.22.1",
+    "moment": "^2.29.2",
     "prop-types": "^15.6.0",
     "react": "^16.3.2",
     "react-aria-modal": "^2.12.1",
