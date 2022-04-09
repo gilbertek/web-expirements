@@ -12,7 +12,7 @@
   "scripts": {},
   "dependencies": {
     "axios": "^0.18.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "ora": "^3.0.0"
   }
 }
