@@ -17,7 +17,7 @@
     "normalize.css": "^8.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "spectacle": "^4.3.1",
+    "spectacle": "^9.6.0",
     "spectacle-code-slide": "^0.5.2",
     "spectacle-image-slide": "^1.0.1",
     "spectacle-renderer": "^0.0.3"
